@@ -14,120 +14,126 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_userName">
+        android:id="@+id/tilUsername">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de usuario"
-            android:id="@+id/edt_userName" />
+            android:hint="@string/username"
+            android:id="@+id/edtUsername" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_userPassword"
-        android:layout_below="@id/til_userName">
+        android:id="@+id/tilUserPassword"
+        android:layout_below="@id/tilUsername">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña del usuario"
-            android:id="@+id/edt_userPassword"
+            android:hint="@string/password"
+            android:id="@+id/edtUserPassword"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_userEmail"
-        android:layout_below="@id/til_userPassword">
+        android:id="@+id/tilEmail"
+        android:layout_below="@id/tilUserPassword">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email del usuario"
-            android:id="@+id/edt_userEmail" />
+            android:hint="@string/email"
+            android:id="@+id/edtEmail" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatSpinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spn_provincia"
-        android:layout_below="@id/til_userEmail"
+        android:id="@+id/spnProvincia"
+        android:layout_below="@id/tilEmail"
         android:layout_marginTop="15dp">
     </android.support.v7.widget.AppCompatSpinner>
 
     <android.support.v7.widget.AppCompatSpinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spn_localidad"
-        android:layout_below="@id/spn_provincia"
+        android:id="@+id/spnLocalidad"
+        android:layout_below="@id/spnProvincia"
         android:layout_marginTop="15dp">
     </android.support.v7.widget.AppCompatSpinner>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rgrp_individualEnterprise"
-        android:layout_below="@id/spn_localidad"
+        android:id="@+id/rgpIsCompany"
+        android:layout_below="@id/spnLocalidad"
         android:orientation="horizontal"
         android:layout_marginTop="15dp">
 
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="¿Qué eres?"
+            android:text="@string/isCompany"
             android:textSize="16sp"
             android:layout_marginRight="20dp"/>
 
         <RadioButton
-            android:text="Particular"
+            android:text="@string/client"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtn_individual"
+            android:id="@+id/rbtClient"
             android:layout_weight="1" />
 
         <RadioButton
-            android:text="Empresa"
+            android:text="@string/company"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtn_enterprise"
+            android:id="@+id/rbtCompany"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"/>
     </RadioGroup>
 
-    <EditText
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/edt_enterpriseName"
-        android:hint="Nombre de la empresa"
-        android:layout_below="@id/rgrp_individualEnterprise"
-        android:layout_marginTop="5dp"/>
+        android:id="@+id/tilCompany"
+        android:layout_below="@id/rgpIsCompany">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtCompany"
+            android:hint="@string/businessName" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chb_newsletters"
-        android:text="¿Quieres recibir noticias nuestras en su email?"
-        android:layout_below="@id/edt_enterpriseName"
+        android:text="@string/chbEmailNotification"
+        android:layout_below="@id/rgpIsCompany"
         android:layout_marginTop="15dp"/>
 
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chb_agree"
-        android:text="Aceptar términos y condiciones de uso"
+        android:text="@string/acceptTerms"
         android:layout_below="@id/chb_newsletters"
         android:layout_marginTop="10dp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_signUp_ok"
-        android:text="Ok"
-        android:layout_below="@id/chb_agree"
-        android:layout_marginTop="15dp"
+        android:id="@+id/btnSignupOk"
+        android:text="@string/ok"
+        android:backgroundTint="@color/colorPrimary"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:layout_below="@+id/chb_agree"
+        android:onClick="signup"/>
 </RelativeLayout>

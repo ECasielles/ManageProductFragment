@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">ManageProductsRecycler</string>
-    <string name="action_add_product">Añadir producto</string>
-    <string name="action_sort_alphabetically">Ordenar alfabeticamente</string>
-    <string name="action_settings_general">Opciones generales</string>
-    <string name="action_sattings_account">Configuración cuenta</string>
+    <string name="action_add_product">Nuevo producto</string>
+    <string name="action_sort_alphabetically">Ordenar</string>
+    <string name="action_settings_general">Opciones</string>
+    <string name="action_sattings_account">Configuración</string>
+    <string name="isCompany">¿Es empresa?</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="username">Usuario</string>
+    <string name="chbEmailNotification">Recibir actualizaciones en mi correo</string>
+    <string name="acceptTerms">Acepto los términos y condiciones de uso</string>
+    <string name="ok">Ok</string>
+    <string name="client">Cliente</string>
+    <string name="company">Empresa</string>
+    <string name="businessName">Empresa</string>
 </resources>
