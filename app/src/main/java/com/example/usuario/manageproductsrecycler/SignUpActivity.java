@@ -1,14 +1,20 @@
 package com.example.usuario.manageproductsrecycler;
 
+import android.content.res.TypedArray;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import static com.example.usuario.manageproductsrecycler.R.id.edtEmail;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -53,13 +59,23 @@ public class SignUpActivity extends AppCompatActivity {
     public void signup(View view) {
 
     }
+    // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                switch (view.getId()) {
+                switch (adapterView.getId()) {
                     case R.id.spnProvincia:
-                        loadSpinnerCity();
+
+                        adapterView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                loadSpinnerCity(position);
+                            }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+                            }
+                        });
                         break;
                     case R.id.spnLocalidad:
                         break;
@@ -78,12 +94,36 @@ public class SignUpActivity extends AppCompatActivity {
         spCounty.setAdapter(adapter);
     }
 
-    private void loadSpinnerCity() {
+    private void loadSpinnerCity(int position) {
         // Inicializa el Spinner Localidades
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignUpActivity.this,
-                R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
+        TypedArray typedCity = getResources().obtainTypedArray(position);
+        CharSequence[] arrayCities = typedCity.getTextArray(position);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item,arrayCities);
 
         spCounty.setAdapter(adapter);
     }
 
+
+    public boolean validate(){
+
+        boolean isValid = true;
+
+        EditText edtEmail = (EditText) findViewById(R.id.edtEmail);
+        EditText edtUsername = (EditText) findViewById(R.id.edtUsername);
+        EditText edtPwd = (EditText) findViewById(R.id.edtUserPassword);
+
+        String email = edtEmail.getText().toString();
+        String username = edtUsername.getText().toString();
+        String pwd = edtPwd.getText().toString();
+
+        if (email.matches(String.valueOf(Patterns.EMAIL_ADDRESS))) {
+            isValid
+        }
+
+        //if ()
+        //isValid = false;
+
+        return isValid;
+    }
 }
