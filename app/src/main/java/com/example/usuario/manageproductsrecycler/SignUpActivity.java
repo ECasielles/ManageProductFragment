@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static com.example.usuario.manageproductsrecycler.R.id.edtEmail;
 
@@ -32,10 +33,23 @@ public class SignUpActivity extends AppCompatActivity {
 
         spCounty = (Spinner) findViewById(R.id.spnProvincia);
         spCity = (Spinner) findViewById(R.id.spnLocalidad);
-
         tilNameCompany = (TextInputLayout) findViewById(R.id.tilCompany);
-
         typeClient = (RadioGroup) findViewById(R.id.rgpIsCompany);
+
+        // Simplifico código y extraigo el método de ini
+        initRadioClient();
+        loadSpinnerCounty();
+    }
+
+    public void signup(View view) {
+
+    }
+
+    private void showCompany(boolean b) {
+        tilNameCompany.setVisibility(b ? View.VISIBLE : View.GONE);
+    }
+
+    private void initRadioClient() {
         typeClient.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -49,35 +63,27 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-        loadSpinnerCounty();
     }
 
-    private void showCompany(boolean b) {
-        tilNameCompany.setVisibility(b ? View.VISIBLE : View.GONE);
-    }
-    public void signup(View view) {
 
-    }
     // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
+
+        // Inicializa el Spinner Provincias
+        // Le pasamos CharSequence para poder manejar StringBuilder, etc.
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignUpActivity.this,
+                R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
+        spCounty.setAdapter(adapter);
+
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 switch (adapterView.getId()) {
                     case R.id.spnProvincia:
-
-                        adapterView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                loadSpinnerCity(position);
-                            }
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
-                            }
-                        });
+                        loadSpinnerCity(position);
                         break;
                     case R.id.spnLocalidad:
+                        showSelectedCity();
                         break;
                 }
             }
@@ -86,12 +92,8 @@ public class SignUpActivity extends AppCompatActivity {
             }
         };
 
-        // Inicializa el Spinner Provincias
-        // Le pasamos CharSequence para poder manejar StringBuilder, etc.
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignUpActivity.this,
-                R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
-
-        spCounty.setAdapter(adapter);
+        spCounty.setOnItemSelectedListener(spinnerListener);
+        spCity.setOnItemSelectedListener(spinnerListener);
     }
 
     private void loadSpinnerCity(int position) {
@@ -104,8 +106,23 @@ public class SignUpActivity extends AppCompatActivity {
         spCounty.setAdapter(adapter);
     }
 
+    public void showSelectedCity() {
+        // Mensaje concatenado con la provincia y la localidad elegidas
+
+        Toast.makeText(
+                getApplicationContext(),
+                getString(
+                        R.string.messageCityCounty,
+                        spCounty.getSelectedItem().toString(),
+                        spCity.getSelectedItem().toString()
+                ),
+                Toast.LENGTH_LONG
+        ).show();
+    }
 
     public boolean validate(){
+
+        // El método validar guarda también las preferencias
 
         boolean isValid = true;
 
@@ -117,13 +134,11 @@ public class SignUpActivity extends AppCompatActivity {
         String username = edtUsername.getText().toString();
         String pwd = edtPwd.getText().toString();
 
-        if (email.matches(String.valueOf(Patterns.EMAIL_ADDRESS))) {
-            isValid
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            isValid = false;
         }
-
-        //if ()
-        //isValid = false;
 
         return isValid;
     }
+
 }

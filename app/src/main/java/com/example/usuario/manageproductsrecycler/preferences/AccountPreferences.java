@@ -11,31 +11,42 @@ import com.example.usuario.manageproductsrecycler.interfaces.IPreferences;
  */
 
 public class AccountPreferences implements IPreferences {
-
+    // Id de la app (en Project Structure)
+    //public static final String FILE = "com.example.usuario.manageproductsrecycler_preferences";
     private static IPreferences accountPreferences;
-    public static final String FILE = "com.example.usuario.manageproductsrecycler_preferences";
-    public static final String USER = "";
-    public static final String PASSWORD = "";
-    private static Context myContext;
+    public static final String USER = "user";
+    public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    private SharedPreferences sharedPreferences;
 
-    private AccountPreferences() {
-
+    private AccountPreferences(Context context) {
+        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     // Singleton de la clase
     public static IPreferences getInstance(Context context) {
         if(accountPreferences == null)
-            accountPreferences = new AccountPreferences();
-            myContext = context;
+            accountPreferences = new AccountPreferences(context);
+            context = context;
         return accountPreferences;
     }
 
-    public static void putName(String user) {
+    // Recuerda que apply no notifica los fallos
+    // Android nos permite no preocuparnos por el ciclo de vida de la aplicación
+    public void putUser(String user) {
         getEditor().putString(USER, user).apply();
+    }
+    public void putPassword(String password) {
+        getEditor().putString(PASSWORD, password).apply();
+    }
+    public void putEmail(String email) {
+        getEditor().putString(EMAIL, email).apply();
     }
 
     private SharedPreferences.Editor getEditor() {
         //SharedPreferences sharedPreferences = new SharedPreferences(FILE);
-    }
 
+        // Con el editor pongo los diferentes campos
+        return sharedPreferences.edit();
+    }
 }

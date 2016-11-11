@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUserMvp;
 
 /**
  * This class operate the classic login screen using MVP method.
@@ -16,9 +16,9 @@ import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
  * @Version 1.0
  */
 
-public class Login_Activity extends AppCompatActivity implements ILoginMvp.View {
+public class Login_Activity extends AppCompatActivity implements IValidateUserMvp.View {
 
-    private ILoginMvp.Presenter loginMvp;
+    private IValidateUserMvp.Presenter loginMvp;
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;

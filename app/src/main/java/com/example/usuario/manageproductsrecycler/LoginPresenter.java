@@ -3,17 +3,17 @@ package com.example.usuario.manageproductsrecycler;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.example.usuario.manageproductsrecycler.interfaces.ILoginMvp;
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUserMvp;
 
 /**
  * Created by usuario on 6/10/16.
  */
 
-public class LoginPresenter implements ILoginMvp.Presenter {
+public class LoginPresenter implements IValidateUserMvp.Presenter {
 
-    private ILoginMvp.View view;
+    private IValidateUserMvp.View view;
 
-    public LoginPresenter(ILoginMvp.View view) {
+    public LoginPresenter(IValidateUserMvp.View view) {
         this.view = view;
     }
 
@@ -35,7 +35,7 @@ public class LoginPresenter implements ILoginMvp.Presenter {
         else if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*"))
             view.setMessageError(((Context)view).getResources().getString(R.string.password_case), R.id.edt_password);
         else if (password.length() < 8)
-            view.setMessageError(((Context)view).getResources().getString(R.string.password_lenght), R.id.edt_password);
+            view.setMessageError(((Context)view).getResources().getString(R.string.password_length), R.id.edt_password);
         else{
             //Guardar al ususario en la clase Application.
             /**
