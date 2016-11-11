@@ -1,6 +1,6 @@
 package com.example.usuario.manageproductsrecycler.interfaces;
 
 
-public interface IValidateAccountMvp extends IValidateUserMvp {
+public interface IValidateUser extends IValidateUserMvp {
 
 }

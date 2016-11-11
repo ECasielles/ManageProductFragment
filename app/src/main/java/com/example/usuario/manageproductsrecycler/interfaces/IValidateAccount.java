@@ -5,7 +5,7 @@ import android.text.TextUtils;
 
 import com.example.usuario.manageproductsrecycler.R;
 
-public interface IValidateUserMvp {
+public interface IValidateAccount {
 
     /*
     int PASSWORD_OK = 0;
