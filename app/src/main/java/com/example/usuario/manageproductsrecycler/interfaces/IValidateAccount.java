@@ -1,61 +1,43 @@
 package com.example.usuario.manageproductsrecycler.interfaces;
 
-import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
-import com.example.usuario.manageproductsrecycler.R;
+import com.example.usuario.manageproductsrecycler.model.Error;
 
 public interface IValidateAccount {
 
-    /*
-    int PASSWORD_OK = 0;
-    int PASSWORD_DIGIT = 1;
-    int PASSWORD_CASE = 2;
-    int PASSWORD_LENGHT = 3;
-    int DATA_EMPTY = 4;
-    */
-
     interface View {
-        void setMessageError(String error, int viewId);
+        void setMessageError(String messageError, int viewId);
+        void startActivity(Intent intent);
     }
 
     interface Presenter {
-        //boolean validateCredentialsUser(String user);
-        //boolean validateCredentialsPassword(String password);
-
         // Lo implementamos en la interfaz gracias a Java 8
         // aunque mezclamos código con interfaces y no parece buena idea
+        // pero nos ahorramos clases estáticas
 
-        public boolean validateCredentialsUser(String user) {
-            boolean validate = true;
-
-            if (TextUtils.isEmpty(user)) {
-                view.setMessageError(((Context)view).getResources().getString(R.string.data_empty),R.id.edtUsername);
-                validate = false;
-            }
-            return validate;
+        static int validateCredentialsUser(String user) {
+            if (TextUtils.isEmpty(user))
+                return Error.DATA_EMPTY;
+            return Error.OK;
         }
 
-        public boolean validateCredentialsPassword(String password) {
-            boolean validate = true;
-            int idMessage = 0;
+        static int validateCredentialsPassword(String password) {
+            int result = Error.OK;
 
             if (TextUtils.isEmpty(password)) {
-                idMessage = R.string.data_empty;
+                result = Error.DATA_EMPTY;
             } else if (!password.matches(".*[0-9].*")) {
-                idMessage = R.string.password_digit;
+                result = Error.PASSWORD_DIGIT;
             } else if (!password.matches(".*[a-zA-Z].*")) {
-                idMessage = R.string.password_case;
+                result = Error.PASSWORD_CASE;
             } else if (password.length() < 8) {
-                idMessage = R.string.password_length;
+                result = Error.PASSWORD_LENGTH;
             }
 
-            if (!validate) {
-                view.setMessageError(((Context) view).getResources().getString(idMessage), R.id.tilUserPassword);
-                validate = false;
-            }
-
-            return validate;
+            return result;
         }
+
     }
 }

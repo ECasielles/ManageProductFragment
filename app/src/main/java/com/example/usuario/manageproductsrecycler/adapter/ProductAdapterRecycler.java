@@ -1,18 +1,16 @@
 package com.example.usuario.manageproductsrecycler.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.usuario.manageproductsrecycler.ProductApplication;
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.modelo.Product;
+import com.example.usuario.manageproductsrecycler.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;

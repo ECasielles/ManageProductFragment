@@ -2,14 +2,10 @@ package com.example.usuario.manageproductsrecycler;
 
 import android.app.Application;
 
-import com.example.usuario.manageproductsrecycler.modelo.Product;
+import com.example.usuario.manageproductsrecycler.model.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-/**
- * Created by usuario on 20/10/16.
- */
 
 public class ProductApplication extends Application {
     private ArrayList<Product> products = new ArrayList();

@@ -2,7 +2,7 @@ package com.example.usuario.manageproductsrecycler;
 
 import android.app.Application;
 
-import com.example.usuario.manageproductsrecycler.modelo.User;
+import com.example.usuario.manageproductsrecycler.model.User;
 
 /**
  * Created by usuario on 6/10/16.

@@ -12,12 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import static com.example.usuario.manageproductsrecycler.R.id.edtEmail;
-
-public class SignUpActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     private Spinner spCounty;
     private Spinner spCity;
@@ -29,7 +26,7 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_signup);
 
         spCounty = (Spinner) findViewById(R.id.spnProvincia);
         spCity = (Spinner) findViewById(R.id.spnLocalidad);
@@ -71,7 +68,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Inicializa el Spinner Provincias
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignUpActivity.this,
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
         spCounty.setAdapter(adapter);
 
@@ -120,7 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
         ).show();
     }
 
-    public boolean validate(){
+    /*public boolean validate(){
 
         // El método validar guarda también las preferencias
 
@@ -139,6 +136,6 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         return isValid;
-    }
+    }*/
 
 }

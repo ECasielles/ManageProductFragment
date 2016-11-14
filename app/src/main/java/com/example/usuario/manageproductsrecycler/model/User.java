@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler.modelo;
+package com.example.usuario.manageproductsrecycler.model;
 
 /**
  * Created by usuario on 6/10/16.

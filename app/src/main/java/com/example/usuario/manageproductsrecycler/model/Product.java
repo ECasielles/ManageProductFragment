@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler.modelo;
+package com.example.usuario.manageproductsrecycler.model;
 
 import java.util.Comparator;
 import java.util.Locale;
