@@ -1,12 +1,9 @@
 package com.example.usuario.manageproductsrecycler.model;
 
-/**
- * Created by usuario on 6/10/16.
- */
-
 public class User {
     private String user;
     private String password;
+    private String email;
 
     public String getUser() {
         return user;

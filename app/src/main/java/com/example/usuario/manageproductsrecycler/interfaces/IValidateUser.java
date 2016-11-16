@@ -6,8 +6,9 @@ import com.example.usuario.manageproductsrecycler.model.Error;
 
 public interface IValidateUser extends IValidateAccount {
 
-    // Adds code to superclass' presenter interface
-    interface Presenter {
+    // interface Presenter Adds code to superclass' presenter interface
+    // So we need it to have a different name to make a clear distinction
+    interface PresenterUser {
         static int validateCredentialsEmail(String email) {
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
                 return Error.EMAIL_INVALID;

@@ -1,20 +1,27 @@
 package com.example.usuario.manageproductsrecycler;
 
 import android.content.res.TypedArray;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignupActivity extends AppCompatActivity {
+import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.model.User;
+import com.example.usuario.manageproductsrecycler.presenter.SignupPresenter;
+
+public class SignupActivity extends AppCompatActivity implements IValidateUser.View {
 
     private Spinner spCounty;
     private Spinner spCity;
@@ -22,11 +29,14 @@ public class SignupActivity extends AppCompatActivity {
     private RadioGroup typeClient;
     private TextInputLayout tilNameCompany;
     private AdapterView.OnItemSelectedListener spinnerListener; //Atributo delegado
+    private SignupPresenter presenter;
+    private ViewGroup parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        parentLayout = (RelativeLayout) findViewById(R.id.activity_signup);
 
         spCounty = (Spinner) findViewById(R.id.spnProvincia);
         spCity = (Spinner) findViewById(R.id.spnLocalidad);
@@ -39,7 +49,10 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup(View view) {
-
+        // Recoge los datos de la vista (EN CASA)
+        // Llama al método del presentador
+        User user = new User();
+        presenter.validateCredentials(user);
     }
 
     private void showCompany(boolean b) {
@@ -117,8 +130,28 @@ public class SignupActivity extends AppCompatActivity {
         ).show();
     }
 
-    /*public boolean validate(){
+    @Override
+    public void setMessageError(String nameResource, int viewId) {
+        //Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
+        // We have to pick the resource whose name is that given as a parameter
+        String errorMessage = getResources().getString(getResources().getIdentifier(nameResource, "string", getPackageName()));
+        switch (viewId){
+            case R.id.tilUsername:
+                //tilUser.setError(errorMessage);
+                Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
+                break;
+            case R.id.tilUserPassword:
+                //tilPassword.setError(errorMessage);
+                Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
+                break;
+            case R.id.tilEmail:
 
+                break;
+        }
+    }
+
+    public boolean validate(){
+        //Cambia las preferencias
         // El método validar guarda también las preferencias
 
         boolean isValid = true;
@@ -136,6 +169,6 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         return isValid;
-    }*/
+    }
 
 }
