@@ -6,14 +6,12 @@ import android.preference.PreferenceManager;
 
 import com.example.usuario.manageproductsrecycler.interfaces.IPreferences;
 
-/**
- * Created by usuario on 11/10/16.
- */
-
 public class AccountPreferences implements IPreferences {
+
+    private static IPreferences accountPreferences;
     // Id de la app (en Project Structure)
     //public static final String FILE = "com.example.usuario.manageproductsrecycler_preferences";
-    private static IPreferences accountPreferences;
+
     public static final String USER = "user";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
@@ -27,7 +25,6 @@ public class AccountPreferences implements IPreferences {
     public static IPreferences getInstance(Context context) {
         if(accountPreferences == null)
             accountPreferences = new AccountPreferences(context);
-            context = context;
         return accountPreferences;
     }
 
@@ -49,4 +46,5 @@ public class AccountPreferences implements IPreferences {
         // Con el editor pongo los diferentes campos
         return sharedPreferences.edit();
     }
+
 }

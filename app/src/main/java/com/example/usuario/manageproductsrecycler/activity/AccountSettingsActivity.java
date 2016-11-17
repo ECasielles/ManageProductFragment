@@ -1,11 +1,9 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.activity;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-/**
- * Created by jaime on 7/11/16.
- */
+import com.example.usuario.manageproductsrecycler.R;
 
 public class AccountSettingsActivity extends PreferenceActivity {
     @Override

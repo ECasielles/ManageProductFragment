@@ -3,10 +3,6 @@ package com.example.usuario.manageproductsrecycler.model;
 import java.util.Comparator;
 import java.util.Locale;
 
-/**
- * Created by usuario on 20/10/16.
- */
-
 public class Product implements Comparable<Product>{
     private int mId;
     private String mName;

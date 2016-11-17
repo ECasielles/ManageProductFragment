@@ -14,5 +14,6 @@
             android:entries="@array/pref_numcolumn_entries"
             android:entryValues="@array/pref_numcolumn_values"
             android:key="list_preference_1" />
+
     </PreferenceCategory>
 </PreferenceScreen>

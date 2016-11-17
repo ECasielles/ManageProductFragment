@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.adapter.ProductAdapterRecycler;
 
 public class ProductsActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class ProductsActivity extends AppCompatActivity {
         fabtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddProduct.class);
+                Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +57,7 @@ public class ProductsActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.action_add_product:
-                intent = new Intent(this, AddProduct.class);
+                intent = new Intent(this, AddProductActivity.class);
                 startActivityForResult(intent, ADD_PRODUCT);
                 break;
             case R.id.action_sort_alphabetically:

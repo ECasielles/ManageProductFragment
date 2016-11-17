@@ -4,7 +4,7 @@
     <string name="action_sort_alphabetically">Ordenar</string>
     <string name="action_settings_general">Opciones</string>
     <string name="action_sattings_account">Configuración</string>
-    <string name="isCompany">¿Es empresa?</string>
+    <string name="isCompany">¿Empresa o particular?</string>
     <string name="email">Email</string>
     <string name="password">Contraseña</string>
     <string name="username">Usuario</string>

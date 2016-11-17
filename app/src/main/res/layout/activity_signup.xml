@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.usuario.manageproductsrecycler.SignupActivity">
+    tools:context="com.example.usuario.manageproductsrecycler.activity.SignupActivity">
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -37,6 +37,7 @@
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Email label -->
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -47,6 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
+            android:inputType="textEmailAddress"
             android:id="@+id/edtEmail" />
     </android.support.design.widget.TextInputLayout>
 
@@ -97,7 +99,6 @@
             android:layout_marginLeft="10dp"/>
     </RadioGroup>
 
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -114,7 +115,7 @@
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/chb_newsletters"
+        android:id="@+id/chbUpdates"
         android:text="@string/chbEmailNotification"
         android:layout_below="@id/rgpIsCompany"
         android:layout_marginTop="15dp"/>
@@ -122,18 +123,18 @@
     <android.support.v7.widget.AppCompatCheckBox
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/chb_agree"
+        android:id="@+id/chbTaS"
         android:text="@string/acceptTerms"
-        android:layout_below="@id/chb_newsletters"
+        android:layout_below="@id/chbUpdates"
         android:layout_marginTop="10dp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSignupOk"
+        android:id="@+id/btnSignup"
         android:text="@string/ok"
         android:backgroundTint="@color/colorPrimary"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/chb_agree"
+        android:layout_below="@+id/chbTaS"
         android:onClick="signup"/>
 </RelativeLayout>

@@ -1,5 +1,6 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.activity;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -17,8 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
-import com.example.usuario.manageproductsrecycler.model.User;
 import com.example.usuario.manageproductsrecycler.presenter.SignupPresenter;
 
 public class SignupActivity extends AppCompatActivity implements IValidateUser.View {
@@ -28,9 +29,14 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     private Button btnSignup;
     private RadioGroup typeClient;
     private TextInputLayout tilNameCompany;
-    private AdapterView.OnItemSelectedListener spinnerListener; //Atributo delegado
-    private SignupPresenter presenter;
+    private EditText edtUser;
+    private EditText edtPwd;
+    private EditText edtEmail;
     private ViewGroup parentLayout;
+
+    private AdapterView.OnItemSelectedListener spinnerListener; //Atributo delegado
+
+    private SignupPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +48,14 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         spCity = (Spinner) findViewById(R.id.spnLocalidad);
         tilNameCompany = (TextInputLayout) findViewById(R.id.tilCompany);
         typeClient = (RadioGroup) findViewById(R.id.rgpIsCompany);
+        btnSignup = (Button) findViewById(R.id.btnSignup);
 
-        // Simplifico código y extraigo el método de ini
+        edtUser = (EditText) findViewById(R.id.edtUsername);
+        edtPwd = (EditText) findViewById(R.id.edtUserPassword);
+        edtEmail = (EditText) findViewById(R.id.edtEmail);
+
+        presenter = new SignupPresenter(this);
+
         initRadioClient();
         loadSpinnerCounty();
     }
@@ -51,8 +63,11 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     public void signup(View view) {
         // Recoge los datos de la vista (EN CASA)
         // Llama al método del presentador
-        User user = new User();
-        presenter.validateCredentials(user);
+        presenter.validateCredentials(
+                edtUser.getText().toString(),
+                edtPwd.getText().toString(),
+                edtEmail.getText().toString()
+        );
     }
 
     private void showCompany(boolean b) {
@@ -78,8 +93,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
 
     // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
-
-        // Inicializa el Spinner Provincias
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
@@ -106,6 +119,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         spCity.setOnItemSelectedListener(spinnerListener);
     }
 
+
     private void loadSpinnerCity(int position) {
         // Inicializa el Spinner Localidades
         TypedArray typedCity = getResources().obtainTypedArray(position);
@@ -116,6 +130,9 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         spCounty.setAdapter(adapter);
     }
 
+    /**
+     * Shows selected city
+     */
     public void showSelectedCity() {
         // Mensaje concatenado con la provincia y la localidad elegidas
 
@@ -130,11 +147,19 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         ).show();
     }
 
+    /**
+     * Method that shows a custom message in a {@link Snackbar} component
+     * depending on error occurred during data validation.
+     * @param nameResource Error message String name showed
+     * Use {@link android.content.res.Resources#getIdentifier(String, String, String)} to get class id in R class.
+     * @param viewId view id in which error will show
+     */
     @Override
     public void setMessageError(String nameResource, int viewId) {
         //Toast.makeText(this, messageError, Toast.LENGTH_SHORT).show();
         // We have to pick the resource whose name is that given as a parameter
-        String errorMessage = getResources().getString(getResources().getIdentifier(nameResource, "string", getPackageName()));
+        String errorMessage = getResources().getString(getResources().
+                getIdentifier(nameResource, "string", getPackageName()));
         switch (viewId){
             case R.id.tilUsername:
                 //tilUser.setError(errorMessage);
@@ -145,7 +170,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
             case R.id.tilEmail:
-
+                Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
         }
     }
@@ -153,6 +178,9 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     public boolean validate(){
         //Cambia las preferencias
         // El método validar guarda también las preferencias
+        // User
+        // Password
+        // AccountPreferences
 
         boolean isValid = true;
 
@@ -168,7 +196,16 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
             isValid = false;
         }
 
+        //Switch con Snackbar
+
         return isValid;
+    }
+
+    public void startActivity() {
+        Intent intent = new Intent(SignupActivity.this, ProductsActivity.class);
+        startActivity(intent);
+        // Closes this activity after validation
+        finish();
     }
 
 }

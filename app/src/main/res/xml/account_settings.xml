@@ -19,5 +19,6 @@
             android:summary="@string/pref_password_summary"
             android:key="password"
             android:inputType="textPassword"/>
+
     </PreferenceCategory>
 </PreferenceScreen>

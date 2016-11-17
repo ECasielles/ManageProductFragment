@@ -6,6 +6,7 @@ import com.example.usuario.manageproductsrecycler.model.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class ProductApplication extends Application {
     private ArrayList<Product> products = new ArrayList();
@@ -25,10 +26,15 @@ public class ProductApplication extends Application {
         products.add(product);
     }
 
-    public ArrayList<Product> getProducts(boolean ascendente){
+    public List<Product> getProducts() {
+        Collections.sort(products, Product.PRICE_COMPARATOR);
+        //Collections.sort(products, (p1, p2) -> Double.compare(p1.getmPrice(), p2.getmPrice()));
+        return products;
+    }
+
+    public List<Product> getProducts(boolean ascendente){
         //El segundo argumento es cómo va a compararse, cambiar entre las dos constantes Comparator creados para ordenar de manera distinta.
         //Collections.sort(products, Product.PRICE_COMPARATOR);
-        //Collections.sort(products, (p1, p2) -> Double.compare(p1.getmPrice(), p2.getmPrice()));
         if (!ascendente)
             Collections.sort(products, Collections.reverseOrder());
         else

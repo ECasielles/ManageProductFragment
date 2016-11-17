@@ -4,10 +4,6 @@ import android.app.Application;
 
 import com.example.usuario.manageproductsrecycler.model.User;
 
-/**
- * Created by usuario on 6/10/16.
- */
-
 //Al crear la clase que hereda de 'Android.App.Aplication' hay que ir a 'Manifest' y especificarlos.
 //En 'Manifest' escribí 'android:name=".LoginAplication"'.
 public class LoginAplication extends Application {

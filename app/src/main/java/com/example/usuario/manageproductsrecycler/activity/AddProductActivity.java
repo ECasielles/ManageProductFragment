@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,10 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.usuario.manageproductsrecycler.presenter.LoginPresenter;
+import com.example.usuario.manageproductsrecycler.R;
+import com.example.usuario.manageproductsrecycler.activity.ProductsActivity;
+import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
+import com.example.usuario.manageproductsrecycler.presenter.ProductPresenter;
 
-public class AddProduct extends AppCompatActivity implements LoginMvp2.View{
-    LoginMvp2.Presenter presenter;
+public class AddProductActivity extends AppCompatActivity implements IProduct.View{
+    IProduct.Presenter presenter;
     EditText edtName;
     EditText edtDescription;
     EditText edtDosage;
@@ -28,7 +31,7 @@ public class AddProduct extends AppCompatActivity implements LoginMvp2.View{
     }
 
     private void initialize (){
-        presenter = new LoginPresenter(this);
+        presenter = new ProductPresenter(this);
         edtName = (EditText) findViewById(R.id.edt_name);
         edtDescription = (EditText) findViewById(R.id.edt_description);
         edtDosage = (EditText) findViewById(R.id.edt_dosage);

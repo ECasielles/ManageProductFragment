@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.activity;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
 import com.example.usuario.manageproductsrecycler.presenter.LoginPresenter;
 
@@ -37,8 +38,6 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         loginMvp = new LoginPresenter(this);
         edtUser = (EditText) findViewById(R.id.edt_user);
         edtPassword = (EditText) findViewById(R.id.edt_password);
-
-
 
         btnOk = (Button) findViewById(R.id.btn_ok);
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -82,4 +81,10 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
                 break;
         }
     }
+
+    public void startActivity() {
+        Intent intent = new Intent(LoginActivity.this, ProductsActivity.class);
+        startActivity(intent);
+    }
+
 }

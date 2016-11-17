@@ -1,6 +1,5 @@
 package com.example.usuario.manageproductsrecycler.interfaces;
 
-import android.content.Intent;
 import android.text.TextUtils;
 
 import com.example.usuario.manageproductsrecycler.model.Error;
@@ -9,14 +8,19 @@ public interface IValidateAccount {
 
     interface View {
         void setMessageError(String messageError, int viewId);
-        void startActivity(Intent intent);
+        void startActivity();
     }
 
     interface Presenter {
+
+        int validateCredentialsUser(String user);
+        int validateCredentialsPassword(String password);
+
         // Lo implementamos en la interfaz gracias a Java 8
         // aunque mezclamos código con interfaces y no parece buena idea
         // pero nos ahorramos clases estáticas
 
+        /*
         static int validateCredentialsUser(String user) {
             if (TextUtils.isEmpty(user))
                 return Error.DATA_EMPTY;
@@ -38,6 +42,7 @@ public interface IValidateAccount {
 
             return result;
         }
+        */
 
     }
 }
