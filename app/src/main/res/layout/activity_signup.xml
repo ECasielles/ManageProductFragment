@@ -117,7 +117,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/chbUpdates"
         android:text="@string/chbEmailNotification"
-        android:layout_below="@id/rgpIsCompany"
+        android:layout_below="@id/tilCompany"
         android:layout_marginTop="15dp"/>
 
     <android.support.v7.widget.AppCompatCheckBox

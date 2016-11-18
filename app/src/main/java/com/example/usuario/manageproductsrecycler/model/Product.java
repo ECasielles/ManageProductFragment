@@ -1,9 +1,13 @@
 package com.example.usuario.manageproductsrecycler.model;
 
+import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
+
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Locale;
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product>, Serializable, IProduct {
+
     private int mId;
     private String mName;
     private String mDescription;
@@ -13,6 +17,12 @@ public class Product implements Comparable<Product>{
     private int mStock;
     private int mImage;
 
+    public static final Comparator<Product> NAME_COMPARATOR = new Comparator<Product>() {
+        @Override
+        public int compare(Product p1, Product p2) {
+            return p1.mName.compareTo(p2.mName);
+        }
+    };
     public static final Comparator<Product> PRICE_COMPARATOR = new Comparator<Product>() {
         @Override
         public int compare(Product p1, Product p2) {

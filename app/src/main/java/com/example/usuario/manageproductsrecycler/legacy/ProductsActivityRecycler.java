@@ -1,21 +1,19 @@
-package com.example.usuario.manageproductsrecycler.activity;
+package com.example.usuario.manageproductsrecycler.legacy;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.adapter.ProductAdapterRecycler;
+import com.example.usuario.manageproductsrecycler.activity.AccountSettingsActivity;
+import com.example.usuario.manageproductsrecycler.activity.GeneralSettingsActivity;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivityRecycler extends AppCompatActivity {
 
-    FloatingActionButton fabtnAdd;
     private ProductAdapterRecycler adapter;
     private RecyclerView rcvProduct;
     private static final int ADD_PRODUCT = 0;
@@ -26,21 +24,13 @@ public class ProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
 
-
-        fabtnAdd = (FloatingActionButton) findViewById(R.id.fabtn_add);
-        fabtnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddProductActivity.class);
-                startActivity(intent);
-            }
-        });
-
         adapter = new ProductAdapterRecycler(this);
         rcvProduct = (RecyclerView) findViewById(R.id.rcv_product);
         rcvProduct.setLayoutManager(new LinearLayoutManager(this));
         rcvProduct.setHasFixedSize(true);
         rcvProduct.setAdapter(adapter);
+
+        //Botón
     }
 
     /*
@@ -64,11 +54,11 @@ public class ProductsActivity extends AppCompatActivity {
                 adapter.sortAlphabetically();
                 break;
             case R.id.acction_settings_general:
-                intent = new Intent(ProductsActivity.this,GeneralSettingsActivity.class);
+                intent = new Intent(ProductsActivityRecycler.this,GeneralSettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.acction_settings_account:
-                intent = new Intent(ProductsActivity.this,AccountSettingsActivity.class);
+                intent = new Intent(ProductsActivityRecycler.this,AccountSettingsActivity.class);
                 startActivity(intent);
                 break;
         }

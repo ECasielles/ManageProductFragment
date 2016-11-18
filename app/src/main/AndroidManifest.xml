@@ -16,11 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ProductsActivity" />
-        <activity android:name=".activity.AddProductActivity" />
+        <activity android:name=".legacy.ProductsActivityRecycler" />
+        <activity android:name=".legacy.AddProductActivity" />
         <activity android:name=".activity.AccountSettingsActivity" />
         <activity android:name=".activity.GeneralSettingsActivity" />
-        <activity android:name=".activity.SignupActivity" />
+        <activity
+            android:name=".activity.SignupActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
+        <activity android:name=".activity.ManageProductActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:layout_width="70dp"
@@ -13,17 +15,17 @@
         android:layout_marginLeft="22dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="18dp"
-        android:id="@+id/imgv_product" />
+        android:id="@+id/imgvProduct" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imgv_product"
-        android:layout_toRightOf="@+id/imgv_product"
+        android:layout_alignTop="@+id/imgvProduct"
+        android:layout_toRightOf="@+id/imgvProduct"
         android:layout_marginLeft="36dp"
         android:layout_marginStart="36dp"
-        android:id="@+id/txv_itemName"
+        android:id="@+id/txvItemName"
         android:textSize="24sp"
         android:textStyle="normal|bold" />
 
@@ -32,18 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:id="@+id/txv_itemStock"
-        android:layout_below="@+id/txv_itemName"
-        android:layout_alignLeft="@+id/txv_itemName"
-        android:layout_alignStart="@+id/txv_itemName" />
+        android:id="@+id/txvItemStock"
+        android:layout_below="@+id/txvItemName"
+        android:layout_alignLeft="@+id/txvItemName"
+        android:layout_alignStart="@+id/txvItemName" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txv_itemPrice"
-        android:layout_alignBaseline="@+id/txv_itemStock"
-        android:layout_alignBottom="@+id/txv_itemStock"
-        android:layout_toRightOf="@+id/txv_itemStock"
-        android:layout_toEndOf="@+id/txv_itemStock" />
+        android:id="@+id/txvItemPrice"
+        android:layout_alignBaseline="@+id/txvItemStock"
+        android:layout_alignBottom="@+id/txvItemStock"
+        android:layout_toRightOf="@+id/txvItemStock"
+        android:layout_toEndOf="@+id/txvItemStock" />
 </RelativeLayout>

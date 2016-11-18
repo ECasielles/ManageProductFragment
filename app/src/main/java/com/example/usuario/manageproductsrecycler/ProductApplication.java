@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProductApplication extends Application {
-    private ArrayList<Product> products = new ArrayList();
+    private ArrayList<Product> products = new ArrayList<>();
 
     @Override
     public void onCreate() {

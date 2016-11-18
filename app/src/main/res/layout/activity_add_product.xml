@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.usuario.manageproductsrecycler.activity.AddProductActivity"
+    tools:context="com.example.usuario.manageproductsrecycler.legacy.AddProductActivity"
     android:orientation="vertical">
 
     <ScrollView
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/edt_name"
+                android:id="@+id/edtProductName"
                 android:hint="Nombre del medicamento"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/edt_description"
+                android:id="@+id/edtProductDescription"
                 android:hint="Descripción del producto"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/edt_dosage"
+                android:id="@+id/edtProductDosage"
                 android:hint="Concentración del medicamento"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/edt_brand"
+                android:id="@+id/edtProductBrand"
                 android:hint="Marca del medicamento"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/edt_price"
+                android:id="@+id/edtProductPrice"
                 android:inputType="numberDecimal"
                 android:hint="Precio del producto"/>
             </android.support.design.widget.TextInputLayout>
@@ -111,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:id="@+id/edt_stock"
+                android:id="@+id/edtProductStock"
                 android:inputType="number"
                 android:hint="Cantidad en stock del medicamento"/>
             </android.support.design.widget.TextInputLayout>
@@ -120,7 +120,7 @@
                 android:text="Añadir Medicamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_add"
+                android:id="@+id/btnProductAdd"
                 android:layout_below="@id/til_stock"
                 android:backgroundTint="@color/colorPrimary" />
         </LinearLayout>

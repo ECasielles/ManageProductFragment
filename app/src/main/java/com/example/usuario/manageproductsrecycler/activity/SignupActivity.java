@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
 import com.example.usuario.manageproductsrecycler.presenter.SignupPresenter;
 
 public class SignupActivity extends AppCompatActivity implements IValidateUser.View {
@@ -90,7 +91,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         });
     }
 
-
     // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.
@@ -118,7 +118,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         spCounty.setOnItemSelectedListener(spinnerListener);
         spCity.setOnItemSelectedListener(spinnerListener);
     }
-
 
     private void loadSpinnerCity(int position) {
         // Inicializa el Spinner Localidades
@@ -160,6 +159,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         // We have to pick the resource whose name is that given as a parameter
         String errorMessage = getResources().getString(getResources().
                 getIdentifier(nameResource, "string", getPackageName()));
+
         switch (viewId){
             case R.id.tilUsername:
                 //tilUser.setError(errorMessage);
@@ -202,7 +202,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     }
 
     public void startActivity() {
-        Intent intent = new Intent(SignupActivity.this, ProductsActivity.class);
+        Intent intent = new Intent(SignupActivity.this, ProductsActivityRecycler.class);
         startActivity(intent);
         // Closes this activity after validation
         finish();

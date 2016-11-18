@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler.adapter;
+package com.example.usuario.manageproductsrecycler.legacy;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -64,10 +64,10 @@ public class ProductAdapterRecycler extends RecyclerView.Adapter<ProductAdapterR
 
         public ProductViewHolder(View item) {
             super(item);
-            imgvProduct = (ImageView) item.findViewById(R.id.imgv_product);
-            txvName = (TextView) item.findViewById(R.id.txv_itemName);
-            txvStock = (TextView) item.findViewById(R.id.txv_itemStock);
-            txvPrice = (TextView) item.findViewById(R.id.txv_itemPrice);
+            imgvProduct = (ImageView) item.findViewById(R.id.imgvProduct);
+            txvName = (TextView) item.findViewById(R.id.txvItemName);
+            txvStock = (TextView) item.findViewById(R.id.txvItemStock);
+            txvPrice = (TextView) item.findViewById(R.id.txvItemPrice);
         }
     }
 

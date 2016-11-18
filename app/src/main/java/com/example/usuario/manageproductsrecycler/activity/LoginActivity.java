@@ -12,11 +12,12 @@ import android.widget.EditText;
 
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
+import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
 import com.example.usuario.manageproductsrecycler.presenter.LoginPresenter;
 
 public class LoginActivity extends AppCompatActivity implements IValidateAccount.View {
 
-    private IValidateAccount.Presenter loginMvp;
+    private IValidateAccount.Presenter presenter;
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;
@@ -35,22 +36,22 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         // Generalized programming
         parentLayout = (ViewGroup) findViewById(R.id.activity_login_relative);
 
-        loginMvp = new LoginPresenter(this);
-        edtUser = (EditText) findViewById(R.id.edt_user);
-        edtPassword = (EditText) findViewById(R.id.edt_password);
+        presenter = new LoginPresenter(this);
+        edtUser = (EditText) findViewById(R.id.edtUserLogin);
+        edtPassword = (EditText) findViewById(R.id.edtUserPasswordLogin);
 
         btnOk = (Button) findViewById(R.id.btn_ok);
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginPresenter) loginMvp).validateCredentialsLogin(
+                ((LoginPresenter) presenter).validateCredentialsLogin(
                         edtUser.getText().toString(),
                         edtPassword.getText().toString())
                 ;
             }
         });
 
-        btnSignUp = (Button) findViewById(R.id.btn_signUp);
+        btnSignUp = (Button) findViewById(R.id.btnSignupLogin);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
     }
 
     public void startActivity() {
-        Intent intent = new Intent(LoginActivity.this, ProductsActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ProductsActivityRecycler.class);
         startActivity(intent);
     }
 
