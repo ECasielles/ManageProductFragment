@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         edtUser = (EditText) findViewById(R.id.edtUserLogin);
         edtPassword = (EditText) findViewById(R.id.edtUserPasswordLogin);
 
-        btnOk = (Button) findViewById(R.id.btn_ok);
+        btnOk = (Button) findViewById(R.id.btnLoginOk);
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });

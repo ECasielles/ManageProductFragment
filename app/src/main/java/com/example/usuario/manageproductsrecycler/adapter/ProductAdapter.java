@@ -37,7 +37,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     public ProductAdapter(Context context) {
         // El ArrayList interno es igual al que se obtiene con getProducts
         super(context, R.layout.item_product,
-                new ArrayList<Product>(((ProductApplication)context.getApplicationContext()).getProducts()));
+                new ArrayList<>(((ProductApplication)context.getApplicationContext()).getProducts()));
     }
 
     // Ejemplo de método de filtrado que debe ir en el constructor
@@ -48,7 +48,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View view = convertView;
         ProductHolder productHolder;
 
@@ -61,25 +60,25 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
             productHolder = new ProductHolder();
             // Error típico de examen no igualar el imageView de la vista
-            productHolder.productImage = (ImageView)view.findViewById(R.id.imageView);
-            productHolder.txvName=(TextView)view.findViewById(R.id.txvItemName);
-            productHolder.txvStock=(TextView)view.findViewById(R.id.txvItemStock);
-            productHolder.txvPrice=(TextView)view.findViewById(R.id.txvItemPrice);
+            productHolder.productImage = (ImageView)view.findViewById(R.id.ivwItemProductImage);
+            productHolder.txvName = (TextView)view.findViewById(R.id.txvItemProductName);
+            productHolder.txvStock = (TextView)view.findViewById(R.id.txvItemProductStock);
+            productHolder.txvPrice = (TextView)view.findViewById(R.id.txvItemProductPrice);
 
             //Aquí Lourdes nos puede poner cualquier tipo de comprobación en el examen
             //Y siempre cae en el examen
 
             //Si hay que hacer un filtrado de los elementos, se hará con un método propio
             //en el constructor
-
             view.setTag(productHolder);
         } else {
             productHolder = (ProductHolder)view.getTag();
-            productHolder.productImage.setBackgroundResource(getItem(position).getmImage());
-            productHolder.txvName.setText(getItem(position).getmName());
-            productHolder.txvStock.setText(getItem(position).getmStock());
-            productHolder.txvPrice.setText(getItem(position).getFormatedPrice());
         }
+
+        productHolder.productImage.setBackgroundResource(getItem(position).getmImage());
+        productHolder.txvName.setText(getItem(position).getmName());
+        productHolder.txvStock.setText(getItem(position).getFotmattedUnitsInStock());
+        productHolder.txvPrice.setText(getItem(position).getFormatedPrice());
 
         return view;
     }

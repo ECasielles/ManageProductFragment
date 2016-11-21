@@ -26,7 +26,7 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
-        listProducts = (ListView) findViewById(R.id.listProduct);
+        listProducts = (ListView) findViewById(R.id.listActivityProducts);
 
         adapter = new ProductAdapter(this);
         listProducts.setAdapter(adapter);
@@ -65,12 +65,12 @@ public class ProductActivity extends AppCompatActivity {
             case R.id.action_sort_alphabetically:
                 adapter.sortAlphabetically();
                 break;
-            case R.id.acction_settings_general:
-                intent = new Intent(ProductActivity.this,GeneralSettingsActivity.class);
+            case R.id.action_settings_general:
+                intent = new Intent(ProductActivity.this, GeneralSettingsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.acction_settings_account:
-                intent = new Intent(ProductActivity.this,AccountSettingsActivity.class);
+            case R.id.action_settings_account:
+                intent = new Intent(ProductActivity.this, AccountSettingsActivity.class);
                 startActivity(intent);
                 break;
         }

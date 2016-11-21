@@ -13,7 +13,7 @@
 
     <ImageView
         app:srcCompat="@drawable/cruz"
-        android:id="@+id/imageView"
+        android:id="@+id/imvLoginImage"
         android:layout_centerHorizontal="true"
         android:background="@drawable/shape_image"
         android:layout_width="160dp"
@@ -22,8 +22,8 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_user"
-        android:layout_below="@id/imageView"
+        android:id="@+id/tilLoginUser"
+        android:layout_below="@id/imvLoginImage"
         android:layout_marginTop="20dp"
         app:errorEnabled="true">
 
@@ -39,8 +39,8 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/til_password"
-        android:layout_below="@id/til_user"
+        android:id="@+id/tilLoginPassword"
+        android:layout_below="@id/tilLoginUser"
         app:counterEnabled="true"
         app:errorEnabled="true"
         app:counterMaxLength="20">
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/chb_remember"
-        android:layout_below="@id/til_password"
+        android:layout_below="@id/tilLoginPassword"
         android:text="Recordar usuario"
         android:textSize="16sp" />
 
@@ -69,7 +69,7 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/til_password"
+        android:layout_below="@id/tilLoginPassword"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout">
@@ -78,7 +78,7 @@
             android:text="Login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_ok"
+            android:id="@+id/btnLoginOk"
             android:backgroundTint="@color/colorPrimary" />
 
         <Button

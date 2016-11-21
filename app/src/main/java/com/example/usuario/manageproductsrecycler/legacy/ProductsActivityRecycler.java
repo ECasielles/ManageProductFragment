@@ -53,11 +53,11 @@ public class ProductsActivityRecycler extends AppCompatActivity {
             case R.id.action_sort_alphabetically:
                 adapter.sortAlphabetically();
                 break;
-            case R.id.acction_settings_general:
+            case R.id.action_settings_general:
                 intent = new Intent(ProductsActivityRecycler.this,GeneralSettingsActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.acction_settings_account:
+            case R.id.action_settings_account:
                 intent = new Intent(ProductsActivityRecycler.this,AccountSettingsActivity.class);
                 startActivity(intent);
                 break;

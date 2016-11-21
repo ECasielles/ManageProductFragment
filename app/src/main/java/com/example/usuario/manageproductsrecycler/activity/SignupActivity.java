@@ -25,8 +25,8 @@ import com.example.usuario.manageproductsrecycler.presenter.SignupPresenter;
 
 public class SignupActivity extends AppCompatActivity implements IValidateUser.View {
 
-    private Spinner spCounty;
-    private Spinner spCity;
+    private Spinner spnCounty;
+    private Spinner spnCity;
     private Button btnSignup;
     private RadioGroup typeClient;
     private TextInputLayout tilNameCompany;
@@ -45,8 +45,8 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         setContentView(R.layout.activity_signup);
         parentLayout = (RelativeLayout) findViewById(R.id.activity_signup);
 
-        spCounty = (Spinner) findViewById(R.id.spnProvincia);
-        spCity = (Spinner) findViewById(R.id.spnLocalidad);
+        spnCounty = (Spinner) findViewById(R.id.spnProvincia);
+        spnCity = (Spinner) findViewById(R.id.spnLocalidad);
         tilNameCompany = (TextInputLayout) findViewById(R.id.tilCompany);
         typeClient = (RadioGroup) findViewById(R.id.rgpIsCompany);
         btnSignup = (Button) findViewById(R.id.btnSignup);
@@ -59,6 +59,8 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
 
         initRadioClient();
         loadSpinnerCounty();
+
+        Toast.makeText(this, "kk", Toast.LENGTH_LONG).show();
     }
 
     public void signup(View view) {
@@ -96,7 +98,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
                 R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
-        spCounty.setAdapter(adapter);
+        spnCounty.setAdapter(adapter);
 
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
@@ -115,8 +117,8 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
             }
         };
 
-        spCounty.setOnItemSelectedListener(spinnerListener);
-        spCity.setOnItemSelectedListener(spinnerListener);
+        spnCounty.setOnItemSelectedListener(spinnerListener);
+        spnCity.setOnItemSelectedListener(spinnerListener);
     }
 
     private void loadSpinnerCity(int position) {
@@ -126,7 +128,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item,arrayCities);
 
-        spCounty.setAdapter(adapter);
+        spnCounty.setAdapter(adapter);
     }
 
     /**
@@ -139,8 +141,8 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
                 getApplicationContext(),
                 getString(
                         R.string.messageCityCounty,
-                        spCounty.getSelectedItem().toString(),
-                        spCity.getSelectedItem().toString()
+                        spnCounty.getSelectedItem().toString(),
+                        spnCity.getSelectedItem().toString()
                 ),
                 Toast.LENGTH_LONG
         ).show();

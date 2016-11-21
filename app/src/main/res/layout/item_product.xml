@@ -15,17 +15,17 @@
         android:layout_marginLeft="22dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="18dp"
-        android:id="@+id/imgvProduct" />
+        android:id="@+id/ivwItemProductImage" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imgvProduct"
-        android:layout_toRightOf="@+id/imgvProduct"
+        android:layout_alignTop="@+id/ivwItemProductImage"
+        android:layout_toRightOf="@+id/ivwItemProductImage"
         android:layout_marginLeft="36dp"
         android:layout_marginStart="36dp"
-        android:id="@+id/txvItemName"
+        android:id="@+id/txvItemProductName"
         android:textSize="24sp"
         android:textStyle="normal|bold" />
 
@@ -34,18 +34,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:id="@+id/txvItemStock"
-        android:layout_below="@+id/txvItemName"
-        android:layout_alignLeft="@+id/txvItemName"
-        android:layout_alignStart="@+id/txvItemName" />
+        android:id="@+id/txvItemProductStock"
+        android:layout_below="@+id/txvItemProductName"
+        android:layout_alignLeft="@+id/txvItemProductName"
+        android:layout_alignStart="@+id/txvItemProductName" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txvItemPrice"
-        android:layout_alignBaseline="@+id/txvItemStock"
-        android:layout_alignBottom="@+id/txvItemStock"
-        android:layout_toRightOf="@+id/txvItemStock"
-        android:layout_toEndOf="@+id/txvItemStock" />
+        android:id="@+id/txvItemProductPrice"
+        android:layout_alignBaseline="@+id/txvItemProductStock"
+        android:layout_alignBottom="@+id/txvItemProductStock"
+        android:layout_toRightOf="@+id/txvItemProductStock"
+        android:layout_toEndOf="@+id/txvItemProductStock" />
 </RelativeLayout>

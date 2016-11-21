@@ -13,9 +13,9 @@
     <item android:title="@string/action_settings_general"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:id="@+id/acction_settings_general"/>
+        android:id="@+id/action_settings_general"/>
     <item android:title="@string/action_sattings_account"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:id="@+id/acction_settings_account"/>
+        android:id="@+id/action_settings_account"/>
 </menu>
