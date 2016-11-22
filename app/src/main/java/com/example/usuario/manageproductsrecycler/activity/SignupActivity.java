@@ -27,7 +27,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
 
     private Spinner spnCounty;
     private Spinner spnCity;
-    private Button btnSignup;
     private RadioGroup typeClient;
     private TextInputLayout tilNameCompany;
     private EditText edtUser;
@@ -45,22 +44,19 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         setContentView(R.layout.activity_signup);
         parentLayout = (RelativeLayout) findViewById(R.id.activity_signup);
 
-        spnCounty = (Spinner) findViewById(R.id.spnProvincia);
-        spnCity = (Spinner) findViewById(R.id.spnLocalidad);
-        tilNameCompany = (TextInputLayout) findViewById(R.id.tilCompany);
-        typeClient = (RadioGroup) findViewById(R.id.rgpIsCompany);
-        btnSignup = (Button) findViewById(R.id.btnSignup);
+        spnCounty = (Spinner) findViewById(R.id.spnSignupProvincia);
+        spnCity = (Spinner) findViewById(R.id.spnSignupLocalidad);
+        tilNameCompany = (TextInputLayout) findViewById(R.id.tilSignupCompany);
+        typeClient = (RadioGroup) findViewById(R.id.rgpSignupIsCompany);
 
-        edtUser = (EditText) findViewById(R.id.edtUsername);
-        edtPwd = (EditText) findViewById(R.id.edtUserPassword);
-        edtEmail = (EditText) findViewById(R.id.edtEmail);
+        edtUser = (EditText) findViewById(R.id.edtSignupUsername);
+        edtPwd = (EditText) findViewById(R.id.edtSignupUserPassword);
+        edtEmail = (EditText) findViewById(R.id.edtSignupEmail);
 
         presenter = new SignupPresenter(this);
 
         initRadioClient();
         loadSpinnerCounty();
-
-        Toast.makeText(this, "kk", Toast.LENGTH_LONG).show();
     }
 
     public void signup(View view) {
@@ -72,20 +68,18 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
                 edtEmail.getText().toString()
         );
     }
-
-    private void showCompany(boolean b) {
-        tilNameCompany.setVisibility(b ? View.VISIBLE : View.GONE);
+    private void showCompany(boolean isVisible) {
+        tilNameCompany.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
-
     private void initRadioClient() {
         typeClient.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 switch (checkedId) {
-                    case R.id.rbtClient:
+                    case R.id.rbtSignupClient:
                         showCompany(false);
                         break;
-                    case R.id.rbtCompany:
+                    case R.id.rbtSignupCompany:
                         showCompany(true);
                         break;
                 }
@@ -96,18 +90,18 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignupActivity.this,
-                R.array.array_provincia_a_localidades, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.provincias, android.R.layout.simple_spinner_dropdown_item);
         spnCounty.setAdapter(adapter);
 
         spinnerListener = new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 switch (adapterView.getId()) {
-                    case R.id.spnProvincia:
+                    case R.id.spnSignupProvincia:
                         loadSpinnerCity(position);
                         break;
-                    case R.id.spnLocalidad:
+                    case R.id.spnSignupLocalidad:
                         showSelectedCity();
                         break;
                 }
@@ -120,15 +114,14 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         spnCounty.setOnItemSelectedListener(spinnerListener);
         spnCity.setOnItemSelectedListener(spinnerListener);
     }
-
     private void loadSpinnerCity(int position) {
         // Inicializa el Spinner Localidades
-        TypedArray typedCity = getResources().obtainTypedArray(position);
+        TypedArray typedCity = getResources().obtainTypedArray(R.array.array_provincia_a_localidades);
         CharSequence[] arrayCities = typedCity.getTextArray(position);
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
-                android.R.layout.simple_spinner_item,arrayCities);
+                android.R.layout.simple_spinner_item, arrayCities);
 
-        spnCounty.setAdapter(adapter);
+        spnCity.setAdapter(adapter);
     }
 
     /**
@@ -136,7 +129,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
      */
     public void showSelectedCity() {
         // Mensaje concatenado con la provincia y la localidad elegidas
-
         Toast.makeText(
                 getApplicationContext(),
                 getString(
@@ -163,20 +155,21 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
                 getIdentifier(nameResource, "string", getPackageName()));
 
         switch (viewId){
-            case R.id.tilUsername:
+            case R.id.tilSignupUsername:
                 //tilUser.setError(errorMessage);
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.tilUserPassword:
+            case R.id.tilSignupUserPassword:
                 //tilPassword.setError(errorMessage);
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.tilEmail:
+            case R.id.tilSignupEmail:
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
         }
     }
 
+    // Incompleto
     public boolean validate(){
         //Cambia las preferencias
         // El método validar guarda también las preferencias
@@ -186,9 +179,9 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
 
         boolean isValid = true;
 
-        EditText edtEmail = (EditText) findViewById(R.id.edtEmail);
-        EditText edtUsername = (EditText) findViewById(R.id.edtUsername);
-        EditText edtPwd = (EditText) findViewById(R.id.edtUserPassword);
+        EditText edtEmail = (EditText) findViewById(R.id.edtSignupEmail);
+        EditText edtUsername = (EditText) findViewById(R.id.edtSignupUsername);
+        EditText edtPwd = (EditText) findViewById(R.id.edtSignupUserPassword);
 
         String email = edtEmail.getText().toString();
         String username = edtUsername.getText().toString();
@@ -204,7 +197,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     }
 
     public void startActivity() {
-        Intent intent = new Intent(SignupActivity.this, ProductsActivityRecycler.class);
+        Intent intent = new Intent(SignupActivity.this, ProductActivity.class);
         startActivity(intent);
         // Closes this activity after validation
         finish();

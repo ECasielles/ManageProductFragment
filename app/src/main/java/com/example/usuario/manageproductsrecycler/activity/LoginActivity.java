@@ -72,11 +72,11 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         // We have to pick the resource whose name is that given as a parameter
         String errorMessage = getResources().getString(getResources().getIdentifier(resourceName, "string", getPackageName()));
         switch (idView){
-            case R.id.tilUsername:
+            case R.id.tilSignupUsername:
                 //tilUser.setError(errorMessage);
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
-            case R.id.tilUserPassword:
+            case R.id.tilSignupUserPassword:
                 //tilPassword.setError(errorMessage);
                 Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
                 break;
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
     }
 
     public void startActivity() {
-        Intent intent = new Intent(LoginActivity.this, ProductsActivityRecycler.class);
+        Intent intent = new Intent(LoginActivity.this, ProductActivity.class);
         startActivity(intent);
     }
 

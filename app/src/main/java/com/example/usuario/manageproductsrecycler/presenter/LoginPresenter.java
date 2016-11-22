@@ -33,12 +33,12 @@ public class LoginPresenter implements IValidateAccount.Presenter {
                 view.startActivity();
             }else {
                 String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validatePassword));
-                view.setMessageError(resourceName, R.id.tilUsername);
+                view.setMessageError(resourceName, R.id.tilSignupUsername);
             }
         }else {
             // Extracts error name from a given error code
             String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validateUser));
-            view.setMessageError(resourceName, R.id.tilUsername);
+            view.setMessageError(resourceName, R.id.tilSignupUsername);
         }
     }
 

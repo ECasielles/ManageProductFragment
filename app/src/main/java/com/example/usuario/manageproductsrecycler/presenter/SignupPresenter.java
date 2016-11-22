@@ -38,16 +38,16 @@ public class SignupPresenter implements IValidateAccount.Presenter, IValidateUse
                     view.startActivity();
                 } else {
                     String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validateEmail));
-                    view.setMessageError(resourceName, R.id.tilEmail);
+                    view.setMessageError(resourceName, R.id.tilSignupEmail);
                 }
             }else {
                 String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validatePassword));
-                view.setMessageError(resourceName, R.id.tilUsername);
+                view.setMessageError(resourceName, R.id.tilSignupUsername);
             }
         }else {
             // Extracts error name from a given error code
             String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validateUser));
-            view.setMessageError(resourceName, R.id.tilUsername);
+            view.setMessageError(resourceName, R.id.tilSignupUsername);
         }
     }
 
@@ -70,7 +70,7 @@ public class SignupPresenter implements IValidateAccount.Presenter, IValidateUse
             result = Error.DATA_EMPTY;
         } else if (!password.matches(".*[0-9].*")) {
             result = Error.PASSWORD_DIGIT;
-        } else if (!password.matches(".*[a-zA-Z].*")) {
+        } else if (!password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*")) {
             result = Error.PASSWORD_CASE;
         } else if (password.length() < 8) {
             result = Error.PASSWORD_LENGTH;

@@ -92,10 +92,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
      *  Sin embargo, nuestros métodos personalizados deben implementarlo.
      */
     public void sortAlphabetically() {
-        if(SORTED_ASC) {
+        if(!SORTED_ASC) {
             sort(Product.NAME_COMPARATOR);
+            SORTED_ASC = true;
         } else {
             sort(Collections.<Product>reverseOrder());
+            SORTED_ASC = false;
         }
         //notifyDataSetChanged();
     }
@@ -104,6 +106,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         add(product);
         //dao.add(product);
         //notifyDataSetChanged();
+    }
+
+    public void editProduct(Product product) {
     }
 
     class ProductHolder {

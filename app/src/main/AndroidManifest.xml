@@ -9,15 +9,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.LoginActivity">
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
+        </activity>
+        <activity android:name=".activity.ProductActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".legacy.ProductsActivityRecycler" />
-        <activity android:name=".legacy.AddProductActivity" />
         <activity android:name=".activity.AccountSettingsActivity" />
         <activity android:name=".activity.GeneralSettingsActivity" />
         <activity

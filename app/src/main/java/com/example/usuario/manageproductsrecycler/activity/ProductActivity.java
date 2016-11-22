@@ -80,7 +80,6 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         switch (requestCode){
             case ADD_PRODUCT:
                 if (resultCode == RESULT_OK){
@@ -90,8 +89,8 @@ public class ProductActivity extends AppCompatActivity {
                 break;
             case EDIT_PRODUCT:
                 if (resultCode == RESULT_OK){
-                    //Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
-                    //((ProductAdapter)listProducts.getAdapter()).editProduct(product);
+                    Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
+                    ((ProductAdapter)listProducts.getAdapter()).editProduct(product);
                 }
                 break;
         }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IProductMvp;
+import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
 import com.example.usuario.manageproductsrecycler.presenter.ProductPresenter;
 
 public class AddProductActivity extends AppCompatActivity implements IProductMvp.View{
