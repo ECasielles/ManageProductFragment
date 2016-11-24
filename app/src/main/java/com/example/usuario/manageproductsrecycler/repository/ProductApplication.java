@@ -1,7 +1,8 @@
-package com.example.usuario.manageproductsrecycler;
+package com.example.usuario.manageproductsrecycler.repository;
 
 import android.app.Application;
 
+import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.model.Product;
 
 import java.util.ArrayList;

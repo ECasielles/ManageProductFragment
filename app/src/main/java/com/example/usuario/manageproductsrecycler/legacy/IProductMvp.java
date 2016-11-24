@@ -1,4 +1,4 @@
-package com.example.usuario.manageproductsrecycler.interfaces;
+package com.example.usuario.manageproductsrecycler.legacy;
 
 public interface IProductMvp {
     interface View {

@@ -1,23 +1,23 @@
 package com.example.usuario.manageproductsrecycler.activity;
 
-import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.interfaces.IProductMvp;
-import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
+import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
 import com.example.usuario.manageproductsrecycler.model.Product;
 import com.example.usuario.manageproductsrecycler.presenter.ProductPresenter;
 
 import static com.example.usuario.manageproductsrecycler.interfaces.IProduct.PRODUCT_KEY;
 
-public class ManageProductActivity extends AppCompatActivity {
+public class ManageProductActivity extends AppCompatActivity implements IProduct.View{
 
-    private IProductMvp.Presenter presenter;
+    private IProduct.Presenter presenter;
     private EditText edtName;
     private EditText edtDescription;
     private EditText edtDosage;
@@ -26,6 +26,7 @@ public class ManageProductActivity extends AppCompatActivity {
     private EditText edtStock;
     private Button btnAction;
     private Product product;
+    private ViewGroup parentLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,45 +36,52 @@ public class ManageProductActivity extends AppCompatActivity {
     }
 
     private void initialize (){
-        //TODO Revisar esta línea. Refactorizar las interfaces.
-        presenter = new ProductPresenter((IProductMvp.View) this);
-        //
+        presenter = new ProductPresenter(this);
+        parentLayout = (ViewGroup) findViewById(R.id.activity_manage_product);
 
-        edtName = (EditText) findViewById(R.id.edtProductName);
-        edtDescription = (EditText) findViewById(R.id.edtProductDescription);
-        edtDosage = (EditText) findViewById(R.id.edtProductDosage);
-        edtBrand = (EditText) findViewById(R.id.edtProductBrand);
-        edtPrice = (EditText) findViewById(R.id.edtProductPrice);
-        edtStock = (EditText) findViewById(R.id.edtProductStock);
+        edtName = (EditText) findViewById(R.id.edtManageName);
+        edtDescription = (EditText) findViewById(R.id.edtManageDetails);
+        edtDosage = (EditText) findViewById(R.id.edtManageDose);
+        edtBrand = (EditText) findViewById(R.id.edtManageBrand);
+        edtPrice = (EditText) findViewById(R.id.edtManagePrice);
+        edtStock = (EditText) findViewById(R.id.edtManageStock);
+        btnAction = (Button) findViewById(R.id.btnManageProductOk);
 
-        btnAction = (Button) findViewById(R.id.btnProductAdd);
         product = (Product) getIntent().getExtras().getSerializable(PRODUCT_KEY);
+
         if(product != null) {
-            if (presenter.validateCredentials(
+
+            presenter.validateProduct(
                     edtName.getText().toString(),
                     edtDescription.getText().toString(),
                     edtDosage.getText().toString(),
                     edtBrand.getText().toString(),
                     edtPrice.getText().toString(),
-                    edtStock.getText().toString())){
-                Intent intent = new Intent(getApplicationContext(), ProductsActivityRecycler.class);
-                startActivity(intent);
+                    edtStock.getText().toString()
+            );
 
+            if (true){
                 btnAction.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         saveProduct();
                     }
                 });
-
             } else {
-                saveProduct();
             }
         }
+
     }
 
     private void saveProduct() {
 
+    }
+
+    @Override
+    public void setMessageError(String nameResource, int viewId) {
+        String errorMessage = getResources().getString(getResources().
+                getIdentifier(nameResource, "string", getPackageName()));
+        Snackbar.make(parentLayout, errorMessage, Snackbar.LENGTH_LONG).show();
     }
 
 }

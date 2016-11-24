@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.usuario.manageproductsrecycler.ProductApplication;
+import com.example.usuario.manageproductsrecycler.repository.ProductApplication;
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.model.Product;
 

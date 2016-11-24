@@ -9,5 +9,7 @@ public class Error {
     public static final int PASSWORD_LENGTH = 12;
     public static final int DATA_EMPTY = 13;
     public static final int EMAIL_INVALID = 14;
+    public static final int INTEGER_INVALID = 15;
+    public static final int DOUBLE_INVALID = 16;
 
 }

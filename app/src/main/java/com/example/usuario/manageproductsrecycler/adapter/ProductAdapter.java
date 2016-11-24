@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.usuario.manageproductsrecycler.ProductApplication;
+import com.example.usuario.manageproductsrecycler.repository.ProductApplication;
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.model.Product;
 
@@ -109,6 +109,12 @@ public class ProductAdapter extends ArrayAdapter<Product> {
     }
 
     public void editProduct(Product product) {
+        remove(getItem(getPosition(product)));
+        insert(product, getPosition(product));
+    }
+
+    public void removeProduct(Product product) {
+        remove(product);
     }
 
     class ProductHolder {

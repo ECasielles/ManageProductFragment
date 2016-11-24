@@ -5,4 +5,6 @@
     <string name="password_length">Longitud mínima de 8 carácteres</string>
     <string name="password_digit">Debe contener al menos un digito</string>
     <string name="email_invalid">Email no válido</string>
+    <string name="integer_invalid">Valor entero no válido</string>
+    <string name="double_invalid">Valor decimal no válido</string>
 </resources>

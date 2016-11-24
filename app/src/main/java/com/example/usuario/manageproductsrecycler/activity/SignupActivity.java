@@ -86,7 +86,6 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
             }
         });
     }
-
     // Loads both spinners, starting with the counties/provinces drop down list
     private void loadSpinnerCounty() {
         // Le pasamos CharSequence para poder manejar StringBuilder, etc.

@@ -21,6 +21,7 @@ public class ProductActivity extends AppCompatActivity {
     private ListView listProducts;
     private static final int ADD_PRODUCT = 0;
     private static final int EDIT_PRODUCT = 1;
+    private static final int REMOVE_PRODUCT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +78,9 @@ public class ProductActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
+        switch (requestCode) {
             case ADD_PRODUCT:
                 if (resultCode == RESULT_OK){
                     Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
@@ -93,6 +93,17 @@ public class ProductActivity extends AppCompatActivity {
                     ((ProductAdapter)listProducts.getAdapter()).editProduct(product);
                 }
                 break;
+            case REMOVE_PRODUCT:
+                if (resultCode == RESULT_OK){
+                    Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
+                    ((ProductAdapter)listProducts.getAdapter()).removeProduct(product);
+                }
+                break;
         }
     }
+
+    //onCreateContextMenu
+    //no es necesario un onLongClickListener
+    //usamos registerForContextMenuInfo(miLista)
+    //public boolean onContextItemSelected
 }
