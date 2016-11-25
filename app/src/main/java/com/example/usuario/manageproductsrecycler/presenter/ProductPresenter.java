@@ -19,7 +19,6 @@ public class ProductPresenter implements IProduct.Presenter, IProduct.ErrorResou
     private int validatePrice;
     private int validateStock;
 
-
     public ProductPresenter(IProduct.View view) {
         this.view = view;
         this.context = (Context) view;
@@ -41,7 +40,7 @@ public class ProductPresenter implements IProduct.Presenter, IProduct.ErrorResou
                         if(validatePrice == Error.OK) {
                             if (validateStock == Error.OK)
                                 //TODO: Arreglar
-                                return new IProduct.ErrorResource
+                                return new IProduct.ErrorResource("",0);
                             else {
                                 String resourceName = ErrorMapUtils.getErrorMap(context).get(String.valueOf(validateStock));
                                 return new IProduct.ErrorResource(resourceName, R.id.tilManageStock);

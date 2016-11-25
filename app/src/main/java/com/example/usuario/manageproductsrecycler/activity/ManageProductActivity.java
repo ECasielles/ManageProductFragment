@@ -1,6 +1,7 @@
 package com.example.usuario.manageproductsrecycler.activity;
 
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,12 +19,12 @@ import static com.example.usuario.manageproductsrecycler.interfaces.IProduct.PRO
 public class ManageProductActivity extends AppCompatActivity implements IProduct.View{
 
     private IProduct.Presenter presenter;
-    private EditText edtName;
-    private EditText edtDescription;
-    private EditText edtDosage;
-    private EditText edtBrand;
-    private EditText edtPrice;
-    private EditText edtStock;
+    private TextInputLayout tilName;
+    private TextInputLayout tilDescription;
+    private TextInputLayout tilDosage;
+    private TextInputLayout tilBrand;
+    private TextInputLayout tilPrice;
+    private TextInputLayout tilStock;
     private Button btnAction;
     private Product product;
     private ViewGroup parentLayout;
@@ -39,25 +40,29 @@ public class ManageProductActivity extends AppCompatActivity implements IProduct
         presenter = new ProductPresenter(this);
         parentLayout = (ViewGroup) findViewById(R.id.activity_manage_product);
 
-        edtName = (EditText) findViewById(R.id.edtManageName);
-        edtDescription = (EditText) findViewById(R.id.edtManageDetails);
-        edtDosage = (EditText) findViewById(R.id.edtManageDose);
-        edtBrand = (EditText) findViewById(R.id.edtManageBrand);
-        edtPrice = (EditText) findViewById(R.id.edtManagePrice);
-        edtStock = (EditText) findViewById(R.id.edtManageStock);
+        tilName = (TextInputLayout) findViewById(R.id.tilManageName);
+        tilDescription = (TextInputLayout) findViewById(R.id.tilManageDetails);
+        tilDosage = (TextInputLayout) findViewById(R.id.tilManageDose);
+        tilBrand = (TextInputLayout) findViewById(R.id.tilManageBrand);
+        tilPrice = (TextInputLayout) findViewById(R.id.tilManagePrice);
+        tilStock = (TextInputLayout) findViewById(R.id.tilManageStock);
         btnAction = (Button) findViewById(R.id.btnManageProductOk);
 
         product = (Product) getIntent().getExtras().getSerializable(PRODUCT_KEY);
 
+        //TODO
+        Bundle bundle = getIntent().putExtras();
+
         if(product != null) {
 
+            //TODO: Arreglar presentador
             presenter.validateProduct(
-                    edtName.getText().toString(),
-                    edtDescription.getText().toString(),
-                    edtDosage.getText().toString(),
-                    edtBrand.getText().toString(),
-                    edtPrice.getText().toString(),
-                    edtStock.getText().toString()
+                    tilName.getEditText().getText().toString(),
+                    tilDescription.getEditText().getText().toString(),
+                    tilDosage.getEditText().getText().toString(),
+                    tilBrand.getEditText().getText().toString(),
+                    tilPrice.getEditText().getText().toString(),
+                    tilStock.getEditText().getText().toString()
             );
 
             if (true){
@@ -73,8 +78,17 @@ public class ManageProductActivity extends AppCompatActivity implements IProduct
 
     }
 
+    //TODO
     private void saveProduct() {
+        Product productNew;
+        String name = tilName.getEditText().getText().toString();
 
+        if(addAction)
+            productNew = new Product(tilName.getEditText().getText().toString(), tilDescription);
+        else
+
+
+        finish();
     }
 
     @Override

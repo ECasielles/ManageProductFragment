@@ -113,6 +113,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         insert(product, getPosition(product));
     }
 
+    //TODO ???????
     public void removeProduct(Product product) {
         remove(product);
     }

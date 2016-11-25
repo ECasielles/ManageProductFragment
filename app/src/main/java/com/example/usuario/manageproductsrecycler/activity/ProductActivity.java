@@ -3,6 +3,7 @@ package com.example.usuario.manageproductsrecycler.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +42,8 @@ public class ProductActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
 
-                //Aquí pondremos parcelable cuando lo demos
-                bundle.putSerializable(PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
+                //Cambiamos de putSerializable a putParcelable    <-----
+                bundle.putParcelable(PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
                 Intent intent = new Intent(ProductActivity.this, ManageProductActivity.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, EDIT_PRODUCT);
@@ -75,35 +76,53 @@ public class ProductActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case ADD_PRODUCT:
                 if (resultCode == RESULT_OK){
-                    Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
+                    //Product product = (Product)data.getExtras().getParcelable(PRODUCT_KEY);
+                    Product product = data.getParcelableExtra(PRODUCT_KEY);
                     ((ProductAdapter)listProducts.getAdapter()).addProduct(product);
                 }
                 break;
             case EDIT_PRODUCT:
                 if (resultCode == RESULT_OK){
-                    Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
+                    //Product product = (Product)data.getExtras().getParcelable(PRODUCT_KEY);
+                    Product product = data.getParcelableExtra(PRODUCT_KEY);
                     ((ProductAdapter)listProducts.getAdapter()).editProduct(product);
-                }
-                break;
-            case REMOVE_PRODUCT:
-                if (resultCode == RESULT_OK){
-                    Product product = (Product)data.getExtras().getSerializable(PRODUCT_KEY);
-                    ((ProductAdapter)listProducts.getAdapter()).removeProduct(product);
                 }
                 break;
         }
     }
 
-    //onCreateContextMenu
+    //TODO
+    public void deleteObject(){ adapter.remove();}
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        if (v.getId()) {
+
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
+        switch () {
+
+        }
+    }
+
     //no es necesario un onLongClickListener
     //usamos registerForContextMenuInfo(miLista)
-    //public boolean onContextItemSelected
+
 }
