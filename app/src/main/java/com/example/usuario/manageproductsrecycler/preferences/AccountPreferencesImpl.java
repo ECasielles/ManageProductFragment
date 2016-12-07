@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 import com.example.usuario.manageproductsrecycler.interfaces.IPreferences;
 
-public class AccountPreferences implements IPreferences {
+public class AccountPreferencesImpl implements IPreferences {
 
     private static IPreferences accountPreferences;
     // Id de la app (en Project Structure)
@@ -17,14 +17,14 @@ public class AccountPreferences implements IPreferences {
     public static final String EMAIL = "email";
     private SharedPreferences sharedPreferences;
 
-    private AccountPreferences(Context context) {
+    private AccountPreferencesImpl(Context context) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     // Singleton de la clase
     public static IPreferences getInstance(Context context) {
         if(accountPreferences == null)
-            accountPreferences = new AccountPreferences(context);
+            accountPreferences = new AccountPreferencesImpl(context);
         return accountPreferences;
     }
 

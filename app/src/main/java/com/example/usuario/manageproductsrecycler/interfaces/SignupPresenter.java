@@ -1,10 +1,6 @@
 package com.example.usuario.manageproductsrecycler.interfaces;
 
-import android.util.Patterns;
-
-import com.example.usuario.manageproductsrecycler.model.Error;
-
-public interface IValidateUser extends IValidateAccount {
+public interface SignupPresenter extends LoginPresenter {
 
     // interface Presenter Adds code to superclass' presenter interface
     // So we need it to have a different name to make a clear distinction

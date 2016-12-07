@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.example.usuario.manageproductsrecycler.model.Error;
 
-public interface IValidateAccount {
+public interface LoginPresenter {
 
     interface View {
         void setMessageError(String messageError, int viewId);

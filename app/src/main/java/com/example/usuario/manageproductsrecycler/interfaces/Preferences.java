@@ -2,9 +2,9 @@ package com.example.usuario.manageproductsrecycler.interfaces;
 
 import android.content.Context;
 
-public interface IPreferences {
+public interface Preferences {
 
     int MODE = Context.MODE_PRIVATE;
-    //static IPreferences getInstance(Context context);
+    //static Preferences getInstance(Context context);
 
 }
