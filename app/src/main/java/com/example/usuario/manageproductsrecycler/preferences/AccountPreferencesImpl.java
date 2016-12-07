@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.usuario.manageproductsrecycler.interfaces.IPreferences;
+import com.example.usuario.manageproductsrecycler.interfaces.Preferences;
 
-public class AccountPreferencesImpl implements IPreferences {
+public class AccountPreferencesImpl implements Preferences {
 
-    private static IPreferences accountPreferences;
+    private static Preferences accountPreferences;
     // Id de la app (en Project Structure)
     //public static final String FILE = "com.example.usuario.manageproductsrecycler_preferences";
 
@@ -22,7 +22,7 @@ public class AccountPreferencesImpl implements IPreferences {
     }
 
     // Singleton de la clase
-    public static IPreferences getInstance(Context context) {
+    public static Preferences getInstance(Context context) {
         if(accountPreferences == null)
             accountPreferences = new AccountPreferencesImpl(context);
         return accountPreferences;

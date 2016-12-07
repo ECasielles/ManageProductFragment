@@ -11,13 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
-import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
-import com.example.usuario.manageproductsrecycler.presenter.LoginPresenter;
+import com.example.usuario.manageproductsrecycler.fragment.ListProductFragment;
+import com.example.usuario.manageproductsrecycler.interfaces.LoginPresenter;
+import com.example.usuario.manageproductsrecycler.presenter.LoginPresenterImpl;
 
-public class LoginActivity extends AppCompatActivity implements IValidateAccount.View {
+public class LoginActivity extends AppCompatActivity implements LoginPresenter.View {
 
-    private IValidateAccount.Presenter presenter;
+    private LoginPresenter.Presenter presenter;
     private EditText edtPassword;
     private EditText edtUser;
     private Button btnOk;
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         // Generalized programming
         parentLayout = (ViewGroup) findViewById(R.id.activity_login_relative);
 
-        presenter = new LoginPresenter(this);
+        presenter = new LoginPresenterImpl(this);
         edtUser = (EditText) findViewById(R.id.edtUserLogin);
         edtPassword = (EditText) findViewById(R.id.edtUserPasswordLogin);
 
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginPresenter) presenter).validateCredentialsLogin(
+                ((LoginPresenterImpl) presenter).validateCredentialsLogin(
                         edtUser.getText().toString(),
                         edtPassword.getText().toString())
                 ;
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements IValidateAccount
     }
 
     public void startActivity() {
-        Intent intent = new Intent(LoginActivity.this, ProductActivity.class);
+        Intent intent = new Intent(LoginActivity.this, ListProductFragment.class);
         startActivity(intent);
     }
 

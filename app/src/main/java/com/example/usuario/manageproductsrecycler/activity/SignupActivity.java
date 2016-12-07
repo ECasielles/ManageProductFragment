@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -19,11 +18,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.fragment.ListProductFragment;
+import com.example.usuario.manageproductsrecycler.interfaces.SignupPresenter;
 import com.example.usuario.manageproductsrecycler.legacy.ProductsActivityRecycler;
-import com.example.usuario.manageproductsrecycler.presenter.SignupPresenter;
+import com.example.usuario.manageproductsrecycler.presenter.SignupPresenterImpl;
 
-public class SignupActivity extends AppCompatActivity implements IValidateUser.View {
+public class SignupActivity extends AppCompatActivity implements SignupPresenter.View {
 
     private Spinner spnCounty;
     private Spinner spnCity;
@@ -36,7 +36,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
 
     private AdapterView.OnItemSelectedListener spinnerListener; //Atributo delegado
 
-    private SignupPresenter presenter;
+    private SignupPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         edtPwd = (EditText) findViewById(R.id.edtSignupUserPassword);
         edtEmail = (EditText) findViewById(R.id.edtSignupEmail);
 
-        presenter = new SignupPresenter(this);
+        presenter = new SignupPresenterImpl(this);
 
         initRadioClient();
         loadSpinnerCounty();
@@ -174,7 +174,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
         // El método validar guarda también las preferencias
         // User
         // Password
-        // AccountPreferences
+        // AccountPreferencesImpl
 
         boolean isValid = true;
 
@@ -196,7 +196,7 @@ public class SignupActivity extends AppCompatActivity implements IValidateUser.V
     }
 
     public void startActivity() {
-        Intent intent = new Intent(SignupActivity.this, ProductActivity.class);
+        Intent intent = new Intent(SignupActivity.this, ListProductFragment.class);
         startActivity(intent);
         // Closes this activity after validation
         finish();

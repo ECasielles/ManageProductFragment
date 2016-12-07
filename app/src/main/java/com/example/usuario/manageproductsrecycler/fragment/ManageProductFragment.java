@@ -1,33 +1,32 @@
-package com.example.usuario.manageproductsrecycler.activity;
+package com.example.usuario.manageproductsrecycler.fragment;
 
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.usuario.manageproductsrecycler.R;
 import com.example.usuario.manageproductsrecycler.interfaces.IProduct;
 import com.example.usuario.manageproductsrecycler.model.Product;
 import com.example.usuario.manageproductsrecycler.presenter.ProductPresenter;
 
-import static com.example.usuario.manageproductsrecycler.interfaces.IProduct.PRODUCT_KEY;
+import static com.example.usuario.manageproductsrecycler.fragment.ListProductFragment.PRODUCT_KEY;
 
-public class ManageProductActivity extends AppCompatActivity implements IProduct.View{
+public class ManageProductFragment extends Fragment implements IProduct.View{
 
-    private IProduct.Presenter presenter;
+    private Product product;
+    private ImageView imageView;
     private TextInputLayout tilName;
-    private TextInputLayout tilDescription;
-    private TextInputLayout tilDosage;
     private TextInputLayout tilBrand;
+    private TextInputLayout tilDescription;
     private TextInputLayout tilPrice;
     private TextInputLayout tilStock;
     private Button btnAction;
-    private Product product;
-    private ViewGroup parentLayout;
+    private boolean aBoolean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

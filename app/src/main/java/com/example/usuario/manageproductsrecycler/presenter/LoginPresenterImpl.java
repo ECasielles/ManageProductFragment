@@ -4,18 +4,18 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
+import com.example.usuario.manageproductsrecycler.interfaces.LoginPresenter;
 import com.example.usuario.manageproductsrecycler.utils.ErrorMapUtils;
 import com.example.usuario.manageproductsrecycler.model.Error;
 
-public class LoginPresenterImpl implements IValidateAccount.Presenter {
+public class LoginPresenterImpl implements LoginPresenter.Presenter {
 
     private int validateUser;
     private int validatePassword;
-    private IValidateAccount.View view;
+    private LoginPresenter.View view;
     private Context context;
 
-    public LoginPresenterImpl(IValidateAccount.View loginView){
+    public LoginPresenterImpl(LoginPresenter.View loginView){
         this.view = loginView;
         this.context = (Context) loginView;
     }

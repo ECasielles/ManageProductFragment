@@ -5,21 +5,21 @@ import android.text.TextUtils;
 import android.util.Patterns;
 
 import com.example.usuario.manageproductsrecycler.R;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateAccount;
-import com.example.usuario.manageproductsrecycler.interfaces.IValidateUser;
+import com.example.usuario.manageproductsrecycler.interfaces.LoginPresenter;
+import com.example.usuario.manageproductsrecycler.interfaces.SignupPresenter;
 import com.example.usuario.manageproductsrecycler.model.Error;
-import com.example.usuario.manageproductsrecycler.preferences.AccountPreferences;
+import com.example.usuario.manageproductsrecycler.preferences.AccountPreferencesImpl;
 import com.example.usuario.manageproductsrecycler.utils.ErrorMapUtils;
 
-public class SignupPresenterImpl implements IValidateAccount.Presenter, IValidateUser.PresenterUser {
+public class SignupPresenterImpl implements LoginPresenter.Presenter, SignupPresenter.PresenterUser {
 
     private int validateUser;
     private int validatePassword;
     private int validateEmail;
-    private IValidateAccount.View view;
+    private LoginPresenter.View view;
     private Context context;
 
-    public SignupPresenterImpl(IValidateAccount.View signupView){
+    public SignupPresenterImpl(LoginPresenter.View signupView){
         this.view = signupView;
         this.context = (Context) signupView;
     }
@@ -52,7 +52,7 @@ public class SignupPresenterImpl implements IValidateAccount.Presenter, IValidat
     }
 
     private void savePreferences(String user, String password, String email) {
-        AccountPreferences accountPreferences = (AccountPreferences) AccountPreferences.getInstance(context);
+        AccountPreferencesImpl accountPreferences = (AccountPreferencesImpl) AccountPreferencesImpl.getInstance(context);
         accountPreferences.putUser(user);
         accountPreferences.putPassword(password);
         accountPreferences.putEmail(email);

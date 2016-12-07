@@ -1,33 +1,79 @@
-package com.example.usuario.manageproductsrecycler.activity;
+package com.example.usuario.manageproductsrecycler.fragment;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.usuario.manageproductsrecycler.R;
+import com.example.usuario.manageproductsrecycler.activity.AccountSettingsActivity;
+import com.example.usuario.manageproductsrecycler.activity.GeneralSettingsActivity;
 import com.example.usuario.manageproductsrecycler.adapter.ProductAdapter;
+import com.example.usuario.manageproductsrecycler.dialog.ConfirmDialog;
 import com.example.usuario.manageproductsrecycler.model.Product;
 
-import static com.example.usuario.manageproductsrecycler.interfaces.IProduct.PRODUCT_KEY;
+import static android.app.Activity.RESULT_OK;
 
-public class ProductActivity extends AppCompatActivity {
+public class ListProductFragment extends Fragment implements ConfirmDialog.OnDeleteProductListener {
 
-    private ProductAdapter adapter;
-    private ListView listProducts;
     private static final int ADD_PRODUCT = 0;
     private static final int EDIT_PRODUCT = 1;
-    private static final int REMOVE_PRODUCT = 2;
+    public static String PRODUCT_KEY = "product";
+    private ProductAdapter adapter;
+    private ListProductListener mCallBack;
+
+    //No permitimos que un Fragment llame a otro
+    //Lo va a gestionar la actividad
+    interface ListProductListener {
+        //En vez de devolver un objeto habla con el presentador
+        //que habla con el repositorio según se le diga
+        void showManageProduct(Bundle bundle);
+    }
+
+    private ListView listProducts;
+    private boolean click = false;
+    private TextView txvEmptyProduct;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products);
+
+    }
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallBack = (ListProductListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getContext().toString() +
+                    " ListProductListener must be implemented");
+        }
+    }
+    @Override
+    public void onDetach() {
+        //Para evitar fugas de memoria desvinculo los objetos persistentes
+        super.onDetach();
+        //Lo que se instancia, se elimina
+        mCallBack = null;
+    }
+    //Lo que era onCreate ahora es onCreateView
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        setContentView(R.layout.fragment_list_products);
         listProducts = (ListView) findViewById(R.id.listActivityProducts);
 
         adapter = new ProductAdapter(this);
@@ -44,12 +90,14 @@ public class ProductActivity extends AppCompatActivity {
 
                 //Cambiamos de putSerializable a putParcelable    <-----
                 bundle.putParcelable(PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
-                Intent intent = new Intent(ProductActivity.this, ManageProductActivity.class);
+                Intent intent = new Intent(ListProductFragment.this, ManageProductFragment.class);
                 intent.putExtras(bundle);
                 startActivityForResult(intent, EDIT_PRODUCT);
             }
         });
 
+
+        //Cuando se crea un Fragment la siguiente línea es el paso de argumentos
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,18 +109,18 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()){
             case R.id.action_add_product:
-                intent = new Intent(this, ManageProductActivity.class);
+                intent = new Intent(this, ManageProductFragment.class);
                 startActivityForResult(intent, ADD_PRODUCT);
                 break;
             case R.id.action_sort_alphabetically:
                 adapter.sortAlphabetically();
                 break;
             case R.id.action_settings_general:
-                intent = new Intent(ProductActivity.this, GeneralSettingsActivity.class);
+                intent = new Intent(ListProductFragment.this, GeneralSettingsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.action_settings_account:
-                intent = new Intent(ProductActivity.this, AccountSettingsActivity.class);
+                intent = new Intent(ListProductFragment.this, AccountSettingsActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -101,9 +149,6 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    //TODO
-    public void deleteObject(){ adapter.remove();}
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -122,7 +167,8 @@ public class ProductActivity extends AppCompatActivity {
         }
     }
 
-    //no es necesario un onLongClickListener
-    //usamos registerForContextMenuInfo(miLista)
-
+    @Override
+    public void deleteObject(Object object) {
+        adapter.remove();
+    }
 }

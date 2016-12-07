@@ -14,7 +14,7 @@
             android:windowSoftInputMode="adjustPan"
             >
         </activity>
-        <activity android:name=".activity.ProductActivity" >
+        <activity android:name=".fragment.ListProductFragment" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +27,7 @@
             android:name=".activity.SignupActivity"
             android:windowSoftInputMode="adjustPan"
             />
-        <activity android:name=".activity.ManageProductActivity" />
+        <activity android:name=".fragment.ManageProductFragment" />
     </application>
 
 </manifest>
