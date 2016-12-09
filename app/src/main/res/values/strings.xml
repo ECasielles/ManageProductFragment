@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ManageProductsFragment</string>
     <string name="action_add_product">Nuevo producto</string>
+    <string name="action_delete_product">Eliminar producto</string>
     <string name="action_sort_alphabetically">Ordenar</string>
     <string name="action_settings_general">Opciones</string>
     <string name="action_sattings_account">Configuración</string>
@@ -22,4 +23,5 @@
     <string name="managePrice">Precio</string>
     <string name="manageOk">Confirmar</string>
     <string name="manageStock">Existencias</string>
+    <string name="nodata">No hay datos para mostrar</string>
 </resources>
