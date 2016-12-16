@@ -24,4 +24,8 @@
     <string name="manageOk">Confirmar</string>
     <string name="manageStock">Existencias</string>
     <string name="nodata">No hay datos para mostrar</string>
+    <string name="no">No</string>
+    <string name="yes">Si</string>
+    <string name="delete_product">¿Desea eliminar el elemento seleccionado?</string>
+    <string name="delete">Eliminar</string>
 </resources>

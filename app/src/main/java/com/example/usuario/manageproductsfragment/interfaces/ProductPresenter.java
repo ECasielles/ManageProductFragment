@@ -1,11 +1,8 @@
 package com.example.usuario.manageproductsfragment.interfaces;
 
-
-import com.example.usuario.manageproductsfragment.adapter.ProductAdapter;
 import com.example.usuario.manageproductsfragment.model.Product;
 
 import java.util.List;
-
 
 public interface ProductPresenter {
 
@@ -16,14 +13,14 @@ public interface ProductPresenter {
     //Hay gente que no pone el onDestroy
     void onDestroy();
 
+    void addProduct(Product product);
+
     interface View {
         void showProducts(List<Product> products);
         void showEmptyText(boolean show);
         void showMessage(String message);
 
-        //Sólo porque lo que hacemos es borrar el adaptador
-        //en vez de leer otra vez de la BD
-        ProductAdapter getAdapter();
+        void showMessageDelete(final Product product);
     }
 
 }

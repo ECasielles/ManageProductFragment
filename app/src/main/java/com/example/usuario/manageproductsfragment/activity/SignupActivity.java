@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.example.usuario.manageproductsfragment.R;
 import com.example.usuario.manageproductsfragment.fragment.ListProductFragment;
 import com.example.usuario.manageproductsfragment.interfaces.SignupPresenter;
-import com.example.usuario.manageproductsfragment.legacy.ProductsActivityRecycler;
 import com.example.usuario.manageproductsfragment.presenter.SignupPresenterImpl;
 
 public class SignupActivity extends AppCompatActivity implements SignupPresenter.View {

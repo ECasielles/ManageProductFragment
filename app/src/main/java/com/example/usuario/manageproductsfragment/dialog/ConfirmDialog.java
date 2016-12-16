@@ -14,7 +14,6 @@ import com.example.usuario.manageproductsfragment.model.Product;
 
 public class ConfirmDialog extends DialogFragment {
 
-    private OnDeleteProductListener onDeleteProductListener;
     private Product product;
     private ProductPresenter presenter;
 
@@ -24,7 +23,7 @@ public class ConfirmDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        product = (Product) getArguments().getParcelable(IProduct.PRODUCT_KEY);
+        product = getArguments().getParcelable(IProduct.PRODUCT_KEY);
         return onCreateConfirmDialog();
     }
 
@@ -33,35 +32,24 @@ public class ConfirmDialog extends DialogFragment {
     }
 
     public Dialog onCreateConfirmDialog() {
-        final Product p = this.product;
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Eliminar elemento");
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.delete);
         builder
-                .setMessage(String.format(getContext().getResources().getString(R.id.)))
+                .setMessage(getString(R.string.delete_product))
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes,new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        MainActivity.this.finish();
+                        presenter.deleteProduct(product);
+                        dialog.cancel();
                     }
                 })
                 .setNegativeButton(R.string.no,new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
 
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-
-        //TODO: Terminar
-        return null;
+        return builder.create();
     }
 
     @Override

@@ -30,6 +30,7 @@ public class ProductPresenterImpl implements ConfirmDialog.OnDeleteProductListen
     }
     @Override
     public void deleteProduct(Product product) {
+
         repository.deleteProduct(product);
 
         //DEPENDE DE LA IMPLEMENTACIÓN repository vs adapter
@@ -37,13 +38,24 @@ public class ProductPresenterImpl implements ConfirmDialog.OnDeleteProductListen
         //El repositorio hace una segunda comprobación ó
         //El adaptador se borra, pero entonces implementamos
         //un getAdapter.
-        view.getAdapter().deleteProduct();
-        if (view.getAdapter().isEmpty())
-            view.showEmptyText(true);
+
+        //view.getAdapter().deleteProduct();
+        //if (view.getAdapter().isEmpty())
+            //view.showEmptyText(true);
+
+        view.showMessageDelete(product);
     }
+
     @Override
     public void onDestroy() {
         this.view = null;
+    }
+
+    @Override
+    public void addProduct(Product product) {
+        repository.addProduct(product);
+        loadProducts();
+
     }
 
 }

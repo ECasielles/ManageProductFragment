@@ -21,30 +21,25 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.usuario.manageproductsfragment.utils.MultiChoicePresenter;
 import com.example.usuario.manageproductsfragment.R;
 import com.example.usuario.manageproductsfragment.adapter.ProductAdapter;
-import com.example.usuario.manageproductsfragment.dialog.ConfirmDialog;
 import com.example.usuario.manageproductsfragment.interfaces.IProduct;
 import com.example.usuario.manageproductsfragment.interfaces.ProductPresenter;
 import com.example.usuario.manageproductsfragment.model.Product;
 import com.example.usuario.manageproductsfragment.presenter.ProductPresenterImpl;
+import com.example.usuario.manageproductsfragment.utils.SimpleMultiChoiceModeListener;
 
 import java.util.List;
 
-//Podríamos heredar de ListFragment
-public class ListProductFragment extends Fragment implements ProductPresenter.View {
+public class MultiListProductFragment extends Fragment implements ProductPresenter.View {
 
-    public static String PRODUCT_KEY = "product";
     private ProductAdapter adapter;
     private ListProductListener mCallBack;
     private ProductPresenter presenter;
+    private MultiChoicePresenter multiChoicePresenter;
 
-
-    //No permitimos que un Fragment llame a otro
-    //Lo va a gestionar la actividad
     public interface ListProductListener {
-        //En vez de devolver un objeto habla con el presentador
-        //que habla con el repositorio según se le diga
         void showManageProduct(Bundle bundle);
     }
 
@@ -56,15 +51,11 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Inicializamos el adaptador y el presentador
         adapter = new ProductAdapter(getContext());
         presenter = new ProductPresenterImpl(this);
 
-        //Retiene la instancia del fragment
         setRetainInstance(true);
 
-        //Esta opción le dice a la actividad que el fragment
-        //tiene su propio menú y llama al método callback onCreateOptionMenu
         setHasOptionsMenu(true);
     }
     @Override
@@ -104,11 +95,30 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
-                bundle.putParcelable(IProduct.PRODUCT_KEY, (Product)parent.getItemAtPosition(position));
-                mCallBack.showListProduct(bundle);
-                    }
-        }
-        );
+                bundle.putParcelable(IProduct.PRODUCT_KEY, (Product) parent.getItemAtPosition(position));
+                mCallBack.showManageProduct(bundle);
+            }
+        });
+
+        multiChoicePresenter = new MultiChoicePresenter(listProducts);
+
+        //Habilita la selección múltiple de la lista
+        listProducts.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        //No queremos que sea una clase anónima porque implementa muchos métodos
+        SimpleMultiChoiceModeListener mcl = new SimpleMultiChoiceModeListener(getContext(), multiChoicePresenter);
+        //Escucha las operaciones de la multiselección
+        listProducts.setMultiChoiceModeListener(mcl);
+
+
+        listProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View parent, int position, long id) {
+                //El estado del checked debe estar en el hashmap
+                listProducts.setItemChecked(position, !multiChoicePresenter.isPositionChecked(position));
+                return false;
+            }
+        });
+
 
         emptyProduct = (TextView) rootView.findViewById(R.id.empty);
 
@@ -126,12 +136,20 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
                             setInterpolator(interpolator).
                             start();
                 }
-                mCallBack.showListProduct(null);
+                mCallBack.showManageProduct(null);
             }
         });
-        registerForContextMenu(listProducts);
+
+        //Eliminamos el registerForContextMenu(listProducts);
         return rootView;
     }
+
+    //Inicializa los valores de la vista, como las listas
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
     //Método que infla el menú del fragment y lo empalma al otro menú
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -155,27 +173,6 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
         menu.setHeaderTitle("Opciones de la lista");
         getActivity().getMenuInflater().inflate(R.menu.menu_contextual, menu);
     }
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()) {
-            case R.id.action_delete_product:
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(IProduct.PRODUCT_KEY, (Product) listProducts.getItemAtPosition(item.getItemId()));
-                ConfirmDialog dialog = new ConfirmDialog();
-
-                //Aquí pasamos parámetros al FragmentDialog
-
-                //Aquí cada uno lo hace como quiera
-                dialog.setPresenter(presenter);
-                dialog.setArguments(bundle);
-                dialog.show(getActivity().getSupportFragmentManager(), "SimpleDialog");
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-
-        }
-    }
 
     //Métodos de la interfaz View
     public void showProducts(List<Product> products) {
@@ -192,15 +189,9 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
 
     }
 
-    //Implementado por decidir que el repositorio
-    //borre el adaptador
-    @Override
-    public ProductAdapter getAdapter() {
-        return adapter;
-    }
 
     @Override
-    public void showMesageDelete(final Product product) {
+    public void showMessageDelete(final Product product) {
         Snackbar.make(getView(), "Producto eliminado", Snackbar.LENGTH_LONG).setAction("UNDO", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,4 +199,5 @@ public class ListProductFragment extends Fragment implements ProductPresenter.Vi
             }
         }).show();
     }
+
 }

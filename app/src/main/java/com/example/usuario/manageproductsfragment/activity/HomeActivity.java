@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import com.example.usuario.manageproductsfragment.R;
 import com.example.usuario.manageproductsfragment.fragment.ListProductFragment;
 import com.example.usuario.manageproductsfragment.fragment.ManageProductFragment;
+import com.example.usuario.manageproductsfragment.fragment.MultiListProductFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements ManageProductFragment.ManageProductListener, ListProductFragment.ListProductListener {
 
     //Creo una lista o mapa de fragment
-    private ListProductFragment listProductFragment;
+    //private ListProductFragment listProductFragment;
+    private MultiListProductFragment multiListProductFragment;
     private ManageProductFragment manageProductFragment;
     //Otros autores ponen aquí el presentador por si lo necesitan
 
@@ -26,9 +28,9 @@ public class HomeActivity extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        listProductFragment = new ListProductFragment();
+        multiListProductFragment = new MultiListProductFragment();
         getSupportFragmentManager().beginTransaction().
-                add(R.id.framehome, listProductFragment).commit();
+                add(R.id.framehome, multiListProductFragment).commit();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void showManageProduct(Bundle bundle) {
-        manageProductFragment = new ManageProductFragment(bundle);
+        manageProductFragment = new ManageProductFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.framehome, manageProductFragment);
         fragmentTransaction.addToBackStack(null);

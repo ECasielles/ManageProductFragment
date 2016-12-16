@@ -9,9 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.usuario.manageproductsfragment.repository.ProductApplication;
 import com.example.usuario.manageproductsfragment.R;
 import com.example.usuario.manageproductsfragment.model.Product;
+import com.example.usuario.manageproductsfragment.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +23,7 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     public ProductAdapter(Context context) {
         // El ArrayList interno es igual al que se obtiene con getProducts
-        super(context, R.layout.item_product,
-                new ArrayList<>(((ProductApplication)context.getApplicationContext()).getProducts()));
+        super(context, R.layout.item_product, (List<Product>) ProductRepository.getInstance());
     }
 
     // Ejemplo de método de filtrado que debe ir en el constructor
@@ -97,9 +96,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
             sort(Product.NAME_COMPARATOR);
         }
     }
-    private int searchProduct(String id) {
+    private int searchProduct(int id) {
         for (int i = 0; i < getCount(); i++)
-            if (getItem(i).getmId().equals(id))
+            if (getItem(i).getmId() == (id))
                 return i;
         return -1;
     }
